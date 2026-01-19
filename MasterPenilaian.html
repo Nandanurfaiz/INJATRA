@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Penilaian - Admin LKP Indo Jaya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        
+        .nav-item-active { background-color: #059669; color: white; box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.3); }
+        .sub-item-active { color: #10b981; font-weight: 600; background-color: rgba(16, 185, 129, 0.1); }
+        .rotate-180 { transform: rotate(180deg); }
+        .animate-fade-in-down { animation: fadeInDown 0.3s ease-out; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <aside class="w-64 bg-slate-900 text-white flex-shrink-0 hidden md:flex flex-col transition-all duration-300">
+            <div class="p-6 flex items-center justify-center border-b border-slate-800">
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-500 text-slate-900 text-xl font-bold mb-3 shadow-lg shadow-emerald-500/40">NU</div>
+                    <h1 class="text-lg font-bold tracking-wide">LKP INDO JAYA</h1>
+                </div>
+            </div>
+            <nav class="flex-1 mt-6 px-4 space-y-2 overflow-y-auto">
+                <a href="dashboardAdmin.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-th-large w-6"></i> <span>Dashboard</span>
+                </a>
+                
+                <div>
+                    <button onclick="toggleMenu('menuAkademik')" class="w-full flex items-center justify-between py-3 px-4 rounded-xl text-white bg-slate-800 transition-all group">
+                        <div class="flex items-center">
+                            <i class="fas fa-graduation-cap w-6 text-emerald-400"></i>
+                            <span class="font-medium">Akademik</span>
+                        </div>
+                        <i id="arrowAkademik" class="fas fa-chevron-down text-xs transition-transform duration-300 rotate-180"></i>
+                    </button>
+                    <div id="menuAkademik" class="pl-11 pr-2 space-y-1 mt-1">
+                        <a href="DataSiswa.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Data Siswa</a>
+                        <a href="MasterPenilaian.html" class="sub-item-active block py-2 px-3 rounded-lg text-sm transition">Master Penilaian</a>
+                    </div>
+                </div>
+
+                <div>
+                    <button onclick="toggleMenu('menuOperasional')" class="w-full flex items-center justify-between py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all group">
+                        <div class="flex items-center">
+                            <i class="fas fa-cogs w-6 group-hover:text-emerald-400 transition-colors"></i>
+                            <span class="font-medium">Operasional</span>
+                        </div>
+                        <i id="arrowOperasional" class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div id="menuOperasional" class="hidden pl-11 pr-2 space-y-1 mt-1">
+                        <a href="ManajemenKelas.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Manajemen Kelas</a>
+                        <a href="DataInstruktur.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Data Instruktur</a>
+                        <a href="JadwalProgram.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Jadwal Program</a>
+                    </div>
+                </div>
+
+                <div>
+                    <button onclick="toggleMenu('menuLaporan')" class="w-full flex items-center justify-between py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all group">
+                        <div class="flex items-center">
+                            <i class="fas fa-file-invoice w-6 group-hover:text-emerald-400 transition-colors"></i>
+                            <span class="font-medium">Laporan</span>
+                        </div>
+                        <i id="arrowLaporan" class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div id="menuLaporan" class="hidden pl-11 pr-2 space-y-1 mt-1">
+                        <a href="RekapJurnal.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Rekap Jurnal</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="p-4 border-t border-slate-800">
+                <a href="index.html" class="flex items-center py-3 px-4 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all">
+                    <i class="fas fa-sign-out-alt w-6"></i> <span class="font-medium">Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm border-b border-slate-200 h-16 flex items-center justify-between px-8 z-10">
+                <h2 class="text-xl font-bold text-slate-800">Master Data Penilaian</h2>
+                <div class="flex gap-3">
+                    <button onclick="openScoreModal()" class="bg-white border border-slate-300 text-slate-600 px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-50 transition shadow-sm flex items-center gap-2">
+                        <i class="fas fa-sliders-h"></i> Atur Skala & Predikat
+                    </button>
+                    <button onclick="openModal('modalAddUnit')" class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-emerald-700 shadow-lg shadow-emerald-500/30 transition flex items-center gap-2">
+                        <i class="fas fa-plus"></i> Tambah Unit
+                    </button>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-8">
+                
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-3 w-full md:w-auto">
+                        <label class="text-sm font-bold text-slate-600">Pilih Program Studi:</label>
+                        <select id="programFilter" onchange="filterTable()" class="px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-bold text-emerald-700 focus:outline-none focus:border-emerald-500 cursor-pointer">
+                            <option value="Jaringan">Teknisi Jaringan</option>
+                            <option value="Desain">Desain Grafis</option>
+                            <option value="Pemrograman">Pemrograman</option>
+                        </select>
+                    </div>
+                    
+                    <div class="text-xs text-slate-500 bg-blue-50 px-3 py-2 rounded-lg border border-blue-100">
+                        <i class="fas fa-info-circle text-blue-500 mr-1"></i>
+                        Daftar unit ini akan menjadi acuan input nilai Instruktur.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-500 text-xs uppercase font-bold tracking-wider border-b border-slate-200">
+                                <th class="py-4 px-6 w-48">Kode Unit</th>
+                                <th class="py-4 px-6">Judul Unit Kompetensi</th>
+                                <th class="py-4 px-6 text-center w-32">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="unitTableBody" class="text-slate-600 text-sm font-medium">
+                            
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition row-Jaringan">
+                                <td class="py-4 px-6 font-mono font-bold text-emerald-600">JR.001</td>
+                                <td class="py-4 px-6 font-bold text-slate-700">Teknik Crimping Kabel UTP</td>
+                                <td class="py-4 px-6 text-center">
+                                    <button onclick="openEditModal('JR.001', 'Teknik Crimping Kabel UTP')" class="text-slate-400 hover:text-blue-600 p-2 transition"><i class="fas fa-edit"></i></button>
+                                    <button onclick="confirmDelete()" class="text-slate-400 hover:text-red-500 p-2 transition"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition row-Jaringan">
+                                <td class="py-4 px-6 font-mono font-bold text-emerald-600">JR.002</td>
+                                <td class="py-4 px-6 font-bold text-slate-700">Konfigurasi Dasar Mikrotik</td>
+                                <td class="py-4 px-6 text-center">
+                                    <button onclick="openEditModal('JR.002', 'Konfigurasi Dasar Mikrotik')" class="text-slate-400 hover:text-blue-600 p-2 transition"><i class="fas fa-edit"></i></button>
+                                    <button onclick="confirmDelete()" class="text-slate-400 hover:text-red-500 p-2 transition"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition row-Desain hidden">
+                                <td class="py-4 px-6 font-mono font-bold text-purple-600">DG.001</td>
+                                <td class="py-4 px-6 font-bold text-slate-700">Prinsip Dasar Desain (Nirmana)</td>
+                                <td class="py-4 px-6 text-center">
+                                    <button onclick="openEditModal('DG.001', 'Prinsip Dasar Desain (Nirmana)')" class="text-slate-400 hover:text-blue-600 p-2 transition"><i class="fas fa-edit"></i></button>
+                                    <button onclick="confirmDelete()" class="text-slate-400 hover:text-red-500 p-2 transition"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition row-Desain hidden">
+                                <td class="py-4 px-6 font-mono font-bold text-purple-600">DG.002</td>
+                                <td class="py-4 px-6 font-bold text-slate-700">Pengoperasian CorelDRAW Dasar</td>
+                                <td class="py-4 px-6 text-center">
+                                    <button onclick="openEditModal('DG.002', 'Pengoperasian CorelDRAW Dasar')" class="text-slate-400 hover:text-blue-600 p-2 transition"><i class="fas fa-edit"></i></button>
+                                    <button onclick="confirmDelete()" class="text-slate-400 hover:text-red-500 p-2 transition"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="modalAddUnit" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-fade-in-down">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+                <h3 class="font-bold text-slate-800 text-lg">Tambah Unit Kompetensi</h3>
+                <button onclick="closeModal('modalAddUnit')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="p-6">
+                <form onsubmit="event.preventDefault(); saveUnit();">
+                    <div class="mb-4">
+                        <label class="block text-slate-700 text-xs font-bold mb-2 uppercase">Program Studi</label>
+                        <select class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white">
+                            <option>Teknisi Jaringan</option>
+                            <option>Desain Grafis</option>
+                            <option>Pemrograman</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-slate-700 text-xs font-bold mb-2 uppercase">Kode Unit</label>
+                        <input type="text" placeholder="Contoh: JR.003" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 uppercase">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-slate-700 text-xs font-bold mb-2 uppercase">Judul Unit Kompetensi</label>
+                        <input type="text" placeholder="Masukkan nama kompetensi..." class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div class="flex items-center justify-end gap-3">
+                        <button type="button" onclick="closeModal('modalAddUnit')" class="px-5 py-2 text-slate-500 hover:bg-slate-100 rounded-xl font-medium transition">Batal</button>
+                        <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 font-bold transition shadow-lg">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalEditUnit" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-fade-in-down">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+                <h3 class="font-bold text-slate-800 text-lg">Edit Unit Kompetensi</h3>
+                <button onclick="closeModal('modalEditUnit')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="p-6">
+                <form onsubmit="event.preventDefault(); saveEditUnit();">
+                    <div class="mb-4">
+                        <label class="block text-slate-700 text-xs font-bold mb-2 uppercase">Kode Unit</label>
+                        <input id="editKode" type="text" readonly class="w-full px-4 py-2 border border-slate-300 bg-slate-100 text-slate-500 rounded-xl focus:outline-none cursor-not-allowed">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-slate-700 text-xs font-bold mb-2 uppercase">Judul Unit Kompetensi</label>
+                        <input id="editJudul" type="text" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div class="flex items-center justify-end gap-3">
+                        <button type="button" onclick="closeModal('modalEditUnit')" class="px-5 py-2 text-slate-500 hover:bg-slate-100 rounded-xl font-medium transition">Batal</button>
+                        <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 font-bold transition shadow-lg">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalScoreScale" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-fade-in-down max-h-[90vh] flex flex-col">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg">Konfigurasi Skala & Predikat</h3>
+                    <p class="text-xs text-slate-500">Buat kategori nilai secara dinamis.</p>
+                </div>
+                <button onclick="closeModal('modalScoreScale')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto">
+                <div class="grid grid-cols-12 gap-4 mb-2 text-xs font-bold text-slate-500 uppercase tracking-wider text-center">
+                    <div class="col-span-3">Predikat</div>
+                    <div class="col-span-4">Batas Bawah (Min)</div>
+                    <div class="col-span-4">Batas Atas (Max)</div>
+                    <div class="col-span-1">Hapus</div>
+                </div>
+
+                <div id="scaleContainer" class="space-y-3 pb-4">
+                    </div>
+
+                <button onclick="addGradeRow()" class="w-full py-2 border-2 border-dashed border-slate-300 rounded-xl text-slate-500 font-bold hover:border-emerald-500 hover:text-emerald-600 transition flex items-center justify-center gap-2 mb-4">
+                    <i class="fas fa-plus"></i> Tambah Predikat Baru
+                </button>
+
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('modalScoreScale')" class="px-5 py-2 text-slate-500 hover:bg-slate-100 rounded-xl font-medium transition">Batal</button>
+                    <button onclick="validateAndSaveScale()" class="px-5 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 font-bold transition shadow-lg">Simpan & Validasi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA AWAL (DEFAULT) ---
+        let gradeData = [
+            { label: 'A', min: 95, max: 100 },
+            { label: 'A-', min: 90, max: 94 },
+            { label: 'B+', min: 85, max: 89 },
+            { label: 'B', min: 80, max: 84 },
+            { label: 'B-', min: 75, max: 79 },
+            { label: 'C+', min: 70, max: 74 }
+        ];
+
+        // --- UI LOGIC ---
+        function toggleMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            const arrow = document.getElementById(menuId.replace('menu', 'arrow'));
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                menu.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        // --- FILTERING & EDIT UNIT ---
+        function filterTable() {
+            const program = document.getElementById('programFilter').value;
+            const rows = document.querySelectorAll('#unitTableBody tr');
+            rows.forEach(row => {
+                if (row.classList.contains('row-' + program)) {
+                    row.classList.remove('hidden');
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+        }
+
+        function openEditModal(kode, judul) {
+            document.getElementById('editKode').value = kode;
+            document.getElementById('editJudul').value = judul;
+            document.getElementById('modalEditUnit').classList.remove('hidden');
+        }
+
+        function saveUnit() { closeModal('modalAddUnit'); alert('Unit Kompetensi baru berhasil disimpan!'); }
+        function saveEditUnit() { closeModal('modalEditUnit'); alert('Perubahan Unit berhasil disimpan!'); }
+        function confirmDelete() { if(confirm('Hapus unit ini?')) alert('Unit dihapus.'); }
+
+        // --- DYNAMIC GRADING SYSTEM LOGIC ---
+
+        function openScoreModal() {
+            renderGrades();
+            document.getElementById('modalScoreScale').classList.remove('hidden');
+        }
+
+        function renderGrades() {
+            const container = document.getElementById('scaleContainer');
+            container.innerHTML = ''; // Clear existing
+
+            gradeData.forEach((grade, index) => {
+                const row = document.createElement('div');
+                row.className = "grid grid-cols-12 gap-4 items-center bg-slate-50 p-2 rounded-lg border border-slate-100";
+                row.innerHTML = `
+                    <div class="col-span-3">
+                        <input type="text" value="${grade.label}" onchange="updateGrade(${index}, 'label', this.value)" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-center font-bold focus:border-emerald-500 outline-none uppercase" placeholder="Predikat">
+                    </div>
+                    <div class="col-span-4">
+                        <input type="number" value="${grade.min}" onchange="updateGrade(${index}, 'min', this.value)" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-center font-mono focus:border-emerald-500 outline-none" placeholder="Min">
+                    </div>
+                    <div class="col-span-4">
+                        <input type="number" value="${grade.max}" onchange="updateGrade(${index}, 'max', this.value)" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-center font-mono focus:border-emerald-500 outline-none" placeholder="Max">
+                    </div>
+                    <div class="col-span-1 text-center">
+                        <button onclick="deleteGrade(${index})" class="text-slate-300 hover:text-red-500 transition"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function addGradeRow() {
+            // Default baru
+            gradeData.push({ label: '', min: 0, max: 0 });
+            renderGrades();
+        }
+
+        function deleteGrade(index) {
+            gradeData.splice(index, 1);
+            renderGrades();
+        }
+
+        function updateGrade(index, field, value) {
+            if (field === 'min' || field === 'max') {
+                gradeData[index][field] = parseInt(value) || 0;
+            } else {
+                gradeData[index][field] = value;
+            }
+        }
+
+        function validateAndSaveScale() {
+            let isValid = true;
+            let errorMessage = "";
+
+            // 1. Sort Descending by Max Score agar validasi overlap mudah
+            gradeData.sort((a, b) => b.max - a.max);
+
+            for (let i = 0; i < gradeData.length; i++) {
+                const current = gradeData[i];
+
+                // Cek Nama Label
+                if (!current.label) {
+                    isValid = false; errorMessage = "Semua predikat harus memiliki nama (Label)."; break;
+                }
+
+                // Cek Min < Max
+                if (current.min >= current.max) {
+                    isValid = false; 
+                    errorMessage = `Error pada Grade ${current.label}: Batas Bawah (${current.min}) tidak boleh >= Batas Atas (${current.max}).`;
+                    break;
+                }
+
+                // Cek Overlap dengan grade di bawahnya
+                if (i < gradeData.length - 1) {
+                    const next = gradeData[i + 1];
+                    // Logika: Min Current harus > Max Next. Jika tidak, berarti overlap.
+                    // Contoh A(95-100), B(96-98) -> Error karena 95 <= 98.
+                    if (current.min <= next.max) {
+                        isValid = false;
+                        errorMessage = `Overlap terdeteksi! Batas bawah ${current.label} (${current.min}) bertabrakan dengan batas atas ${next.label} (${next.max}).`;
+                        break;
+                    }
+                }
+            }
+
+            if (isValid) {
+                renderGrades(); // Re-render agar user melihat urutan yang sudah disortir
+                closeModal('modalScoreScale');
+                alert('Konfigurasi valid! Data telah disimpan dan diurutkan otomatis.');
+            } else {
+                alert(errorMessage);
+            }
+        }
+    </script>
+</body>
+</html>

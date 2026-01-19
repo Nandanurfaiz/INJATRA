@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Saya - Panel Instruktur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+        
+        .sidebar-active { background-color: #2563eb; color: white; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3); }
+        .animate-fade-in-down { animation: fadeInDown 0.3s ease-out; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <aside class="w-64 bg-slate-900 text-white flex-shrink-0 hidden md:flex flex-col transition-all duration-300">
+            <div class="p-6 flex items-center justify-center border-b border-slate-800">
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-blue-600 text-white text-xl font-bold mb-3 shadow-lg shadow-blue-500/40">IN</div>
+                    <h1 class="text-lg font-bold tracking-wide">PANEL INSTRUKTUR</h1>
+                    <p class="text-xs text-slate-400">LKP INDO JAYA</p>
+                </div>
+            </div>
+            <nav class="flex-1 mt-6 px-4 space-y-2 overflow-y-auto">
+                <a href="Dashboard Instruktur.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-home w-6"></i> <span>Beranda</span>
+                </a>
+                <p class="text-xs text-slate-500 uppercase font-bold mt-6 mb-2 px-4 tracking-wider">Kegiatan Belajar</p>
+                <a href="JadwalAbsensi.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-calendar-check w-6"></i> <span>Jadwal & Absensi</span>
+                </a>
+                <a href="BankMateri.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-book-open w-6"></i> <span>Bank Materi</span>
+                </a>
+                <a href="PenilaianSiswa.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-file-contract w-6"></i> <span>Penilaian Siswa</span>
+                </a>
+                <p class="text-xs text-slate-500 uppercase font-bold mt-6 mb-2 px-4 tracking-wider">Akun</p>
+                <a href="ProfilSaya.html" class="sidebar-active flex items-center py-3 px-4 rounded-xl transition-all">
+                    <i class="fas fa-user-circle w-6"></i> <span class="font-medium">Profil Saya</span>
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-800">
+                <a href="index.html" class="flex items-center py-3 px-4 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all">
+                    <i class="fas fa-sign-out-alt w-6"></i> <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm border-b border-slate-200 h-16 flex items-center justify-between px-8 z-10">
+                <h2 class="text-xl font-bold text-slate-800">Pengaturan Akun</h2>
+                <div class="flex items-center gap-3">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-bold text-slate-800">Nanda Nurfaiz</p>
+                        <p class="text-xs text-slate-500">Instruktur Jaringan</p>
+                    </div>
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 border-2 border-blue-50 font-bold">NN</div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-8 flex justify-center">
+                
+                <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-8 animate-fade-in-down">
+                    
+                    <div class="md:col-span-1">
+                        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 text-center">
+                            <div class="w-32 h-32 bg-blue-100 rounded-full flex items-center justify-center text-4xl font-bold text-blue-600 mx-auto mb-4 border-4 border-white shadow-lg">
+                                NN
+                            </div>
+                            <h2 class="text-xl font-bold text-slate-800">Nanda Nurfaiz</h2>
+                            <p class="text-sm text-slate-500 mb-6">Instruktur Jaringan</p>
+                            
+                            <button class="w-full py-2 border border-slate-200 rounded-xl text-slate-600 text-sm font-bold hover:bg-slate-50 transition">
+                                <i class="fas fa-camera mr-2"></i> Ganti Foto
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+                            <form onsubmit="event.preventDefault(); saveProfile();">
+                                
+                                <h3 class="text-sm font-bold text-slate-400 uppercase mb-4 border-b border-slate-100 pb-2">Informasi Dasar</h3>
+                                
+                                <div class="space-y-4 mb-8">
+                                    <div>
+                                        <label class="block text-slate-700 text-xs font-bold mb-2">Nama Lengkap</label>
+                                        <input type="text" value="Nanda Nurfaiz" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none font-medium text-slate-800 transition">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-slate-700 text-xs font-bold mb-2">Nomor WhatsApp / HP</label>
+                                        <input type="text" value="0812-3456-7890" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none font-medium text-slate-800 transition">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-slate-700 text-xs font-bold mb-2">Spesialisasi (Program)</label>
+                                        <div class="relative">
+                                            <input type="text" value="Teknisi Jaringan Komputer" class="w-full px-4 py-3 border border-slate-200 bg-slate-100 rounded-xl text-slate-500 font-bold cursor-not-allowed" disabled>
+                                            <i class="fas fa-lock absolute right-4 top-3.5 text-slate-400"></i>
+                                        </div>
+                                        <p class="text-[10px] text-slate-400 mt-1">*Hubungi Admin jika ingin mengubah spesialisasi.</p>
+                                    </div>
+                                </div>
+
+                                <h3 class="text-sm font-bold text-slate-400 uppercase mb-4 border-b border-slate-100 pb-2">Keamanan</h3>
+                                
+                                <div class="space-y-4 mb-8">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-slate-700 text-xs font-bold mb-2 text-red-500">Password Saat Ini (Wajib)</label>
+                                            <input id="oldPass" type="password" placeholder="Masukkan password lama..." class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none transition">
+                                        </div>
+                                        <div>
+                                            <label class="block text-slate-700 text-xs font-bold mb-2 text-blue-600">Password Baru</label>
+                                            <input id="newPass" type="password" placeholder="Masukkan password baru..." class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none transition">
+                                        </div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 italic">Isi kolom di atas hanya jika Anda ingin mengganti password.</p>
+                                </div>
+
+                                <div class="flex justify-end pt-4 border-t border-slate-100">
+                                    <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30 transform active:scale-95 flex items-center gap-2">
+                                        <i class="fas fa-save"></i> Simpan Perubahan
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function saveProfile() {
+            const btn = document.querySelector('button[type="submit"]');
+            const oldPass = document.getElementById('oldPass').value;
+            const newPass = document.getElementById('newPass').value;
+
+            // VALIDASI SEDERHANA
+            // Jika user mengisi Password Baru, tapi KOSONG di Password Lama
+            if (newPass !== "" && oldPass === "") {
+                alert("PERINGATAN: Untuk mengganti password, Anda WAJIB memasukkan Password Saat Ini (Lama) sebagai konfirmasi keamanan.");
+                document.getElementById('oldPass').focus();
+                return; // Stop proses
+            }
+
+            // Animasi Loading
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...';
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+
+            setTimeout(() => {
+                let message = "Profil berhasil diperbarui!";
+                
+                // Jika password juga diganti
+                if (newPass !== "" && oldPass !== "") {
+                    message = "Profil dan Password berhasil diperbarui! Silakan login ulang nanti.";
+                    // Reset kolom password
+                    document.getElementById('oldPass').value = "";
+                    document.getElementById('newPass').value = "";
+                }
+
+                alert(message);
+                
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75');
+            }, 800);
+        }
+    </script>
+
+</body>
+</html>

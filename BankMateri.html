@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Materi & Silabus - Panel Instruktur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+        
+        .sidebar-active { background-color: #2563eb; color: white; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3); }
+        .modal { transition: opacity 0.25s ease; }
+        .animate-fade-in-down { animation: fadeInDown 0.3s ease-out; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .tab-btn-active { background-color: #eff6ff; color: #1d4ed8; border-bottom: 2px solid #2563eb; font-weight: 700; }
+        .tab-btn-inactive { color: #64748b; hover:text-slate-800; font-weight: 500; border-bottom: 2px solid transparent; }
+        .tab-btn-inactive:hover { background-color: #f8fafc; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <aside class="w-64 bg-slate-900 text-white flex-shrink-0 hidden md:flex flex-col transition-all duration-300">
+            <div class="p-6 flex items-center justify-center border-b border-slate-800">
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-blue-600 text-white text-xl font-bold mb-3 shadow-lg shadow-blue-500/40">IN</div>
+                    <h1 class="text-lg font-bold tracking-wide">PANEL INSTRUKTUR</h1>
+                </div>
+            </div>
+            <nav class="flex-1 mt-6 px-4 space-y-2 overflow-y-auto">
+                <a href="Dashboard Instruktur.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-home w-6"></i> <span>Beranda</span>
+                </a>
+                <p class="text-xs text-slate-500 uppercase font-bold mt-6 mb-2 px-4 tracking-wider">Kegiatan Belajar</p>
+                <a href="JadwalAbsensi.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-calendar-check w-6"></i> <span>Jadwal & Absensi</span>
+                </a>
+                <a href="BankMateri.html" class="sidebar-active flex items-center py-3 px-4 rounded-xl transition-all">
+                    <i class="fas fa-book-open w-6"></i> <span class="font-medium">Bank Materi & Silabus</span>
+                </a>
+                <a href="PenilaianSiswa.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-file-contract w-6"></i> <span>Penilaian Siswa</span>
+                </a>
+                <p class="text-xs text-slate-500 uppercase font-bold mt-6 mb-2 px-4 tracking-wider">Akun</p>
+                <a href="#" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-user-circle w-6"></i> <span>Profil Saya</span>
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-800">
+                <a href="index.html" class="flex items-center py-3 px-4 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all">
+                    <i class="fas fa-sign-out-alt w-6"></i> <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm border-b border-slate-200 h-16 flex items-center justify-between px-8 z-10">
+                <h2 class="text-xl font-bold text-slate-800">Bank Materi & Silabus</h2>
+                <div class="flex items-center gap-3">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-bold text-slate-800">Nanda Nurfaiz</p>
+                        <p class="text-xs text-slate-500">Instruktur Jaringan</p>
+                    </div>
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 border-2 border-blue-50 font-bold">NN</div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-8">
+                
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="w-full md:w-1/2">
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Program Studi (Aktif)</label>
+                        <div class="relative">
+                            <select class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500 font-bold text-slate-700 appearance-none cursor-pointer">
+                                <option value="Jaringan">Teknisi Jaringan Komputer</option>
+                                <option value="Lainnya" disabled>Desain Grafis (Tidak Ada Akses)</option>
+                            </select>
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-blue-600">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-blue-50 px-4 py-3 rounded-xl border border-blue-100 text-sm text-blue-800 w-full md:w-auto">
+                        <i class="fas fa-info-circle text-xl"></i>
+                        <div>
+                            <p class="font-bold">Database Terpusat</p>
+                            <p class="text-xs">Materi ini dapat diakses oleh semua kelas Jaringan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex border-b border-slate-200 mb-6 bg-white rounded-t-xl px-2 pt-2">
+                    <button id="tabRepo" onclick="switchTab('repo')" class="tab-btn-active px-6 py-3 text-sm rounded-t-lg transition flex items-center gap-2">
+                        <i class="fas fa-folder-open"></i> Repository File (Modul)
+                    </button>
+                    <button id="tabSilabus" onclick="switchTab('silabus')" class="tab-btn-inactive px-6 py-3 text-sm rounded-t-lg transition flex items-center gap-2">
+                        <i class="fas fa-list-ol"></i> Rencana Silabus (Harian)
+                    </button>
+                </div>
+
+                <div id="viewRepo" class="animate-fade-in-down">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-slate-700 text-lg">File Modul & Referensi</h3>
+                        <button onclick="openModal('modalUpload')" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition flex items-center shadow-lg shadow-blue-500/20 transform active:scale-95">
+                            <i class="fas fa-cloud-upload-alt mr-2"></i> Upload Baru
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition group relative file-card">
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-xl">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <button onclick="deleteFile(this)" class="text-slate-300 hover:text-red-500 p-1 rounded transition" title="Hapus File">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-sm mb-1 group-hover:text-blue-600 transition">Panduan Crimping Kabel.pdf</h4>
+                            <p class="text-xs text-slate-500 mb-4">1.2 MB • Diupload Admin</p>
+                            <div class="flex justify-between items-center border-t border-slate-100 pt-3">
+                                <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded">Modul Dasar</span>
+                                <button onclick="downloadFile('Panduan Crimping Kabel.pdf')" class="text-blue-600 hover:text-blue-800 text-sm font-bold flex items-center gap-1">
+                                    <i class="fas fa-download"></i> Unduh
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition group relative file-card">
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xl">
+                                    <i class="fas fa-video"></i>
+                                </div>
+                                <button onclick="deleteFile(this)" class="text-slate-300 hover:text-red-500 p-1 rounded transition" title="Hapus File">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-sm mb-1 group-hover:text-blue-600 transition">Tutorial Winbox Dasar</h4>
+                            <p class="text-xs text-slate-500 mb-4">Link Youtube • Diupload Nanda</p>
+                            <div class="flex justify-between items-center border-t border-slate-100 pt-3">
+                                <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded">Video</span>
+                                <button onclick="openLink('https://youtube.com')" class="text-blue-600 hover:text-blue-800 text-sm font-bold flex items-center gap-1">
+                                    <i class="fas fa-external-link-alt"></i> Buka Link
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition group relative file-card">
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center text-xl">
+                                    <i class="fas fa-file-powerpoint"></i>
+                                </div>
+                                <button onclick="deleteFile(this)" class="text-slate-300 hover:text-red-500 p-1 rounded transition" title="Hapus File">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-sm mb-1 group-hover:text-blue-600 transition">Slide Presentasi Topologi</h4>
+                            <p class="text-xs text-slate-500 mb-4">5 MB • Diupload Admin</p>
+                            <div class="flex justify-between items-center border-t border-slate-100 pt-3">
+                                <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded">Presentasi</span>
+                                <button onclick="downloadFile('Slide Topologi.ppt')" class="text-blue-600 hover:text-blue-800 text-sm font-bold flex items-center gap-1">
+                                    <i class="fas fa-download"></i> Unduh
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="viewSilabus" class="hidden animate-fade-in-down">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-slate-700 text-lg">Rencana Pembelajaran (RPP)</h3>
+                        <button onclick="simpanSilabus()" class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-emerald-700 transition shadow-lg transform active:scale-95">
+                            <i class="fas fa-save mr-2"></i> Simpan Perubahan
+                        </button>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-100 text-slate-700 font-bold uppercase text-xs">
+                                <tr>
+                                    <th class="p-4 w-16 text-center border-b">No</th>
+                                    <th class="p-4 border-b">Topik / Judul Materi</th>
+                                    <th class="p-4 w-1/4 border-b">File Pendukung (Modul)</th>
+                                    <th class="p-4 w-16 text-center border-b">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="silabusBody" class="divide-y divide-slate-100 bg-white">
+                                <tr class="hover:bg-slate-50 transition silabus-row">
+                                    <td class="p-4 text-center align-middle"><div class="bg-slate-800 text-white font-bold w-8 h-8 rounded flex items-center justify-center mx-auto row-number">1</div></td>
+                                    <td class="p-4 align-middle"><input type="text" value="Teknik Crimping Kabel UTP" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 font-bold text-slate-700"></td>
+                                    <td class="p-4 align-middle">
+                                        <button onclick="openLinkModal(this)" class="w-full text-left px-3 py-2 bg-blue-50 border border-blue-200 rounded-lg text-blue-700 text-xs font-bold hover:bg-blue-100 transition flex items-center justify-between group">
+                                            <span class="file-label"><i class="fas fa-paperclip mr-1"></i> Panduan Crimping.pdf</span>
+                                            <i class="fas fa-edit opacity-0 group-hover:opacity-100 transition"></i>
+                                        </button>
+                                    </td>
+                                    <td class="p-4 text-center align-middle"><button onclick="deleteRow(this)" class="text-slate-300 hover:text-red-500"><i class="fas fa-trash-alt"></i></button></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition silabus-row">
+                                    <td class="p-4 text-center align-middle"><div class="bg-slate-800 text-white font-bold w-8 h-8 rounded flex items-center justify-center mx-auto row-number">2</div></td>
+                                    <td class="p-4 align-middle"><input type="text" value="Konfigurasi Dasar Mikrotik" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 font-bold text-slate-700"></td>
+                                    <td class="p-4 align-middle">
+                                        <button onclick="openLinkModal(this)" class="w-full text-left px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-400 text-xs font-bold hover:bg-slate-100 transition flex items-center justify-between group">
+                                            <span class="file-label">+ Pautkan File dari Repo</span>
+                                            <i class="fas fa-plus opacity-0 group-hover:opacity-100 transition"></i>
+                                        </button>
+                                    </td>
+                                    <td class="p-4 text-center align-middle"><button onclick="deleteRow(this)" class="text-slate-300 hover:text-red-500"><i class="fas fa-trash-alt"></i></button></td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-slate-50 border-t border-slate-200">
+                                <tr>
+                                    <td class="p-4" colspan="4">
+                                        <button onclick="addSilabusRow()" class="w-full py-2 border-2 border-dashed border-slate-300 rounded-lg text-slate-500 font-bold hover:border-blue-400 hover:text-blue-600 transition flex items-center justify-center gap-2 transform active:scale-95">
+                                            <i class="fas fa-plus-circle"></i> Tambah Pertemuan
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <div id="modalLinkFile" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in-down">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                <h3 class="font-bold text-slate-800">Pilih File Pendukung</h3>
+                <button onclick="closeModal('modalLinkFile')" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-4 max-h-[60vh] overflow-y-auto">
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 border border-slate-200 rounded-xl hover:bg-slate-50 cursor-pointer">
+                        <input type="radio" name="selectedFile" value="Panduan Crimping Kabel.pdf" class="w-4 h-4 text-blue-600 border-slate-300">
+                        <div class="ml-3"><span class="block text-sm font-bold text-slate-700">Panduan Crimping Kabel.pdf</span><span class="block text-xs text-slate-500">Dokumen • 1.2 MB</span></div>
+                    </label>
+                    <label class="flex items-center p-3 border border-slate-200 rounded-xl hover:bg-slate-50 cursor-pointer">
+                        <input type="radio" name="selectedFile" value="Tutorial Winbox Dasar" class="w-4 h-4 text-blue-600 border-slate-300">
+                        <div class="ml-3"><span class="block text-sm font-bold text-slate-700">Tutorial Winbox Dasar</span><span class="block text-xs text-slate-500">Video • Link</span></div>
+                    </label>
+                </div>
+            </div>
+            <div class="px-6 py-4 border-t border-slate-100 flex justify-end gap-2">
+                <button onclick="closeModal('modalLinkFile')" class="px-4 py-2 text-sm text-slate-500 hover:bg-slate-100 rounded-lg">Batal</button>
+                <button onclick="saveLinkedFile()" class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-bold">Pautkan File</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalUpload" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-fade-in-down">
+            <div class="bg-slate-50 px-6 py-4 flex justify-between items-center border-b border-slate-200">
+                <h3 class="font-bold text-slate-800">Upload File Baru</h3>
+                <button onclick="closeModal('modalUpload')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6">
+                <form id="formUpload" onsubmit="event.preventDefault(); submitUpload();">
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">Judul File</label>
+                        <input id="uploadTitle" type="text" placeholder="Masukkan judul..." class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">File</label>
+                        <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center cursor-pointer hover:bg-slate-50">
+                            <i class="fas fa-cloud-upload-alt text-3xl text-slate-400 mb-2"></i>
+                            <p class="text-sm text-slate-500">Klik untuk pilih file</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-3">
+                        <button type="button" onclick="closeModal('modalUpload')" class="px-5 py-2 text-slate-500 hover:bg-slate-100 rounded-xl font-bold">Batal</button>
+                        <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-lg">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentButton = null;
+
+        // 1. Tab Switching
+        function switchTab(tabName) {
+            const btnRepo = document.getElementById('tabRepo');
+            const btnSilabus = document.getElementById('tabSilabus');
+            const viewRepo = document.getElementById('viewRepo');
+            const viewSilabus = document.getElementById('viewSilabus');
+
+            if(tabName === 'repo') {
+                viewRepo.classList.remove('hidden');
+                viewSilabus.classList.add('hidden');
+                btnRepo.className = "tab-btn-active px-6 py-3 text-sm rounded-t-lg transition flex items-center gap-2";
+                btnSilabus.className = "tab-btn-inactive px-6 py-3 text-sm rounded-t-lg transition flex items-center gap-2";
+            } else {
+                viewRepo.classList.add('hidden');
+                viewSilabus.classList.remove('hidden');
+                btnSilabus.className = "tab-btn-active px-6 py-3 text-sm rounded-t-lg transition flex items-center gap-2";
+                btnRepo.className = "tab-btn-inactive px-6 py-3 text-sm rounded-t-lg transition flex items-center gap-2";
+            }
+        }
+
+        // 2. Modal Logic
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        // 3. Repository Actions (HAPUS, DOWNLOAD, BUKA)
+        function deleteFile(btn) {
+            if(confirm("Apakah Anda yakin ingin menghapus file ini dari repository?")) {
+                const card = btn.closest('.file-card');
+                card.remove(); // Hapus kartu dari DOM
+                alert("File berhasil dihapus.");
+            }
+        }
+
+        function downloadFile(filename) {
+            alert("Sedang mengunduh file: " + filename);
+        }
+
+        function openLink(url) {
+            if(confirm("Anda akan diarahkan ke link eksternal. Lanjutkan?")) {
+                window.open(url, '_blank');
+            }
+        }
+
+        function submitUpload() {
+            const title = document.getElementById('uploadTitle').value;
+            closeModal('modalUpload');
+            alert('File "' + title + '" berhasil diupload!');
+            document.getElementById('formUpload').reset();
+        }
+
+        // 4. Silabus Logic (PAUTKAN, HAPUS BARIS, TAMBAH BARIS)
+        function openLinkModal(btn) {
+            currentButton = btn;
+            openModal('modalLinkFile');
+        }
+
+        function saveLinkedFile() {
+            const selected = document.querySelector('input[name="selectedFile"]:checked');
+            if (selected && currentButton) {
+                const fileName = selected.value;
+                currentButton.className = "w-full text-left px-3 py-2 bg-blue-50 border border-blue-200 rounded-lg text-blue-700 text-xs font-bold hover:bg-blue-100 transition flex items-center justify-between group";
+                currentButton.innerHTML = `<span class="file-label"><i class="fas fa-paperclip mr-1"></i> ${fileName}</span> <i class="fas fa-edit opacity-0 group-hover:opacity-100 transition"></i>`;
+                closeModal('modalLinkFile');
+            } else {
+                alert("Pilih salah satu file terlebih dahulu!");
+            }
+        }
+
+        function addSilabusRow() {
+            const tbody = document.getElementById('silabusBody');
+            const rowCount = tbody.getElementsByTagName('tr').length + 1;
+            const newRow = document.createElement('tr');
+            newRow.className = "hover:bg-slate-50 transition silabus-row";
+            newRow.innerHTML = `
+                <td class="p-4 text-center align-middle"><div class="bg-slate-200 text-slate-500 font-bold w-8 h-8 rounded flex items-center justify-center mx-auto row-number">${rowCount}</div></td>
+                <td class="p-4 align-middle"><input type="text" placeholder="Isi judul..." class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 font-bold text-slate-700 transition"></td>
+                <td class="p-4 align-middle">
+                    <button onclick="openLinkModal(this)" class="w-full text-left px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-400 text-xs font-bold hover:bg-slate-100 transition flex items-center justify-between group">
+                        <span class="file-label">+ Pautkan File</span><i class="fas fa-plus opacity-0 group-hover:opacity-100 transition"></i>
+                    </button>
+                </td>
+                <td class="p-4 text-center align-middle"><button onclick="deleteRow(this)" class="text-slate-300 hover:text-red-500"><i class="fas fa-trash-alt"></i></button></td>
+            `;
+            tbody.appendChild(newRow);
+        }
+
+        function deleteRow(btn) {
+            if(confirm('Hapus baris rencana ini?')) {
+                btn.closest('tr').remove();
+                document.querySelectorAll('.row-number').forEach((el, index) => {
+                    el.innerText = index + 1;
+                });
+            }
+        }
+
+        function simpanSilabus() {
+            alert('Rencana pembelajaran berhasil disimpan ke database!');
+        }
+    </script>
+
+</body>
+</html>

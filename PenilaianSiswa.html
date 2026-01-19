@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penilaian Siswa - Panel Instruktur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+        .sidebar-active { background-color: #2563eb; color: white; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3); }
+        .modal { transition: opacity 0.25s ease; }
+        .animate-fade-in-down { animation: fadeInDown 0.3s ease-out; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <aside class="w-64 bg-slate-900 text-white flex-shrink-0 hidden md:flex flex-col transition-all duration-300">
+            <div class="p-6 flex items-center justify-center border-b border-slate-800">
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-blue-600 text-white text-xl font-bold mb-3 shadow-lg shadow-blue-500/40">IN</div>
+                    <h1 class="text-lg font-bold tracking-wide">PANEL INSTRUKTUR</h1>
+                    <p class="text-xs text-slate-400">LKP INDO JAYA</p>
+                </div>
+            </div>
+            <nav class="flex-1 mt-6 px-4 space-y-2 overflow-y-auto">
+                <a href="Dashboard Instruktur.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-home w-6"></i> <span>Beranda</span>
+                </a>
+                <p class="text-xs text-slate-500 uppercase font-bold mt-6 mb-2 px-4 tracking-wider">Kegiatan Belajar</p>
+                <a href="JadwalAbsensi.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-calendar-check w-6"></i> <span>Jadwal & Absensi</span>
+                </a>
+                <a href="BankMateri.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-book-open w-6"></i> <span>Bank Materi</span>
+                </a>
+                <a href="PenilaianSiswa.html" class="sidebar-active flex items-center py-3 px-4 rounded-xl transition-all">
+                    <i class="fas fa-file-contract w-6"></i> <span class="font-medium">Penilaian Siswa</span>
+                </a>
+                <p class="text-xs text-slate-500 uppercase font-bold mt-6 mb-2 px-4 tracking-wider">Akun</p>
+                <a href="#" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-user-circle w-6"></i> <span>Profil Saya</span>
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-800">
+                <a href="index.html" class="flex items-center py-3 px-4 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all">
+                    <i class="fas fa-sign-out-alt w-6"></i> <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm border-b border-slate-200 h-16 flex items-center justify-between px-8 z-10">
+                <h2 class="text-xl font-bold text-slate-800">Input Nilai Kompetensi</h2>
+                <div class="flex items-center gap-3">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-bold text-slate-800">Nanda Nurfaiz</p>
+                        <p class="text-xs text-slate-500">Instruktur Jaringan</p>
+                    </div>
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 border-2 border-blue-50 font-bold">NN</div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-8">
+                
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">1. Pilih Sekolah & Kelas</label>
+                            <div class="relative">
+                                <select id="schoolSelect" onchange="updateTableTitle()" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 font-bold text-slate-700 appearance-none cursor-pointer">
+                                    <option value="SMKN 1 BINANGUN - Kelas Alpha">SMKN 1 BINANGUN - Kelas Alpha</option>
+                                    <option value="SMK YAPEK GOMBONG - Kelas Beta">SMK YAPEK GOMBONG - Kelas Beta</option>
+                                </select>
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-blue-600">
+                                    <i class="fas fa-school"></i>
+                                </div>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">2. Program Pelatihan</label>
+                            <div class="relative">
+                                <select id="programSelect" class="w-full pl-10 pr-4 py-3 bg-slate-100 border border-slate-200 rounded-xl focus:outline-none font-bold text-slate-500 appearance-none cursor-not-allowed" disabled>
+                                    <option value="Jaringan">Teknisi Jaringan Komputer</option>
+                                </select>
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                                    <i class="fas fa-network-wired"></i>
+                                </div>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                                <i class="fas fa-list-alt text-slate-400"></i> Daftar Siswa
+                            </h3>
+                            <p class="text-sm text-slate-500">
+                                <span id="displaySchool" class="font-bold text-blue-600">SMKN 1 BINANGUN - Kelas Alpha</span> 
+                            </p>
+                        </div>
+
+                        <div class="relative w-full md:w-64">
+                            <input type="text" placeholder="Cari Nama Siswa..." class="w-full pl-9 pr-4 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500">
+                            <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-600 text-xs uppercase font-bold tracking-wider border-b border-slate-200">
+                                    <th class="py-4 px-6 w-16 text-center">No</th>
+                                    <th class="py-4 px-6">Nama Siswa</th>
+                                    <th class="py-4 px-6 w-48 text-center">Progress Penilaian</th>
+                                    <th class="py-4 px-6 w-32 text-center">Nilai Rata-rata</th>
+                                    <th class="py-4 px-6 w-32 text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-700 text-sm divide-y divide-slate-100">
+                                <tr class="hover:bg-blue-50/50 transition">
+                                    <td class="py-4 px-6 text-center text-slate-500">1</td>
+                                    <td class="py-4 px-6">
+                                        <p class="font-bold text-slate-800">Rizky Pratama</p>
+                                        <p class="text-xs text-slate-500">NIS: 2026001</p>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center gap-2">
+                                            <div class="flex-1 bg-slate-200 rounded-full h-2">
+                                                <div class="bg-emerald-500 h-2 rounded-full" style="width: 100%"></div>
+                                            </div>
+                                            <span class="text-xs font-bold text-emerald-600">8/8</span>
+                                        </div>
+                                        <p class="text-[10px] text-center text-slate-400 mt-1">Selesai</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-center">
+                                        <span class="bg-emerald-100 text-emerald-700 font-bold px-3 py-1 rounded-full text-xs">88.5 (A)</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-center">
+                                        <button onclick="openGradingModal('Rizky Pratama')" class="bg-white border border-blue-200 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 mx-auto">
+                                            <i class="fas fa-edit"></i> Edit Nilai
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-blue-50/50 transition">
+                                    <td class="py-4 px-6 text-center text-slate-500">2</td>
+                                    <td class="py-4 px-6">
+                                        <p class="font-bold text-slate-800">Siti Aminah</p>
+                                        <p class="text-xs text-slate-500">NIS: 2026002</p>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center gap-2">
+                                            <div class="flex-1 bg-slate-200 rounded-full h-2">
+                                                <div class="bg-amber-400 h-2 rounded-full" style="width: 25%"></div>
+                                            </div>
+                                            <span class="text-xs font-bold text-amber-600">2/8</span>
+                                        </div>
+                                        <p class="text-[10px] text-center text-slate-400 mt-1">Sedang Berlangsung</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-center">
+                                        <span class="text-slate-400 font-bold">-</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-center">
+                                        <button onclick="openGradingModal('Siti Aminah')" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-700 shadow-md transition flex items-center justify-center gap-2 mx-auto">
+                                            <i class="fas fa-pen"></i> Input Nilai
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                 <tr class="hover:bg-blue-50/50 transition">
+                                    <td class="py-4 px-6 text-center text-slate-500">3</td>
+                                    <td class="py-4 px-6">
+                                        <p class="font-bold text-slate-800">Budi Hartono</p>
+                                        <p class="text-xs text-slate-500">NIS: 2026003</p>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center gap-2">
+                                            <div class="flex-1 bg-slate-200 rounded-full h-2">
+                                                <div class="bg-slate-300 h-2 rounded-full" style="width: 0%"></div>
+                                            </div>
+                                            <span class="text-xs font-bold text-slate-500">0/8</span>
+                                        </div>
+                                        <p class="text-[10px] text-center text-slate-400 mt-1">Belum Ada Nilai</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-center">
+                                        <span class="text-slate-400 font-bold">-</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-center">
+                                        <button onclick="openGradingModal('Budi Hartono')" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-700 shadow-md transition flex items-center justify-center gap-2 mx-auto">
+                                            <i class="fas fa-pen"></i> Input Nilai
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <div id="modalInputNilai" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden animate-fade-in-down max-h-[90vh] flex flex-col">
+            
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg">Lembar Penilaian Siswa</h3>
+                    <p class="text-xs text-slate-500">Nama: <span id="modalStudentName" class="font-bold text-blue-600">Nama Siswa</span> | Program: Jaringan</p>
+                </div>
+                <button onclick="closeModal('modalInputNilai')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto bg-slate-50/50">
+                
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                    <table class="w-full text-left text-sm border-collapse">
+                        <thead class="bg-slate-100 text-slate-700 font-bold text-xs uppercase">
+                            <tr>
+                                <th class="p-3 text-center w-10 border-r border-slate-200">No</th>
+                                <th class="p-3 w-32 border-r border-slate-200">Kode Unit</th>
+                                <th class="p-3 border-r border-slate-200">Judul Unit Kompetensi</th>
+                                <th class="p-3 w-24 text-center bg-blue-50 text-blue-800 border-r border-blue-100">Teori (0-100)</th>
+                                <th class="p-3 w-24 text-center bg-emerald-50 text-emerald-800 border-r border-emerald-100">Praktek (0-100)</th>
+                                <th class="p-3 w-24 text-center">Nilai Akhir</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700">
+                            
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-center border-r border-slate-100">1</td>
+                                <td class="p-3 font-mono text-xs border-r border-slate-100">JR.001</td>
+                                <td class="p-3 border-r border-slate-100">Teknik Crimping Kabel UTP</td>
+                                <td class="p-3 text-center bg-blue-50/30 border-r border-slate-100">
+                                    <input type="number" id="t1" oninput="calculateRow(1)" class="w-16 p-1 text-center border border-slate-300 rounded focus:border-blue-500 focus:outline-none" placeholder="0">
+                                </td>
+                                <td class="p-3 text-center bg-emerald-50/30 border-r border-slate-100">
+                                    <input type="number" id="p1" oninput="calculateRow(1)" class="w-16 p-1 text-center border border-slate-300 rounded focus:border-emerald-500 focus:outline-none" placeholder="0">
+                                </td>
+                                <td class="p-3 text-center font-bold text-slate-600 bg-slate-50" id="hasil1">-</td>
+                            </tr>
+
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-center border-r border-slate-100">2</td>
+                                <td class="p-3 font-mono text-xs border-r border-slate-100">JR.002</td>
+                                <td class="p-3 border-r border-slate-100">Konfigurasi Dasar Mikrotik (Winbox)</td>
+                                <td class="p-3 text-center bg-blue-50/30 border-r border-slate-100">
+                                    <input type="number" id="t2" oninput="calculateRow(2)" class="w-16 p-1 text-center border border-slate-300 rounded focus:border-blue-500 focus:outline-none" placeholder="0">
+                                </td>
+                                <td class="p-3 text-center bg-emerald-50/30 border-r border-slate-100">
+                                    <input type="number" id="p2" oninput="calculateRow(2)" class="w-16 p-1 text-center border border-slate-300 rounded focus:border-emerald-500 focus:outline-none" placeholder="0">
+                                </td>
+                                <td class="p-3 text-center font-bold text-slate-600 bg-slate-50" id="hasil2">-</td>
+                            </tr>
+
+                             <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-center border-r border-slate-100">3</td>
+                                <td class="p-3 font-mono text-xs border-r border-slate-100">JR.003</td>
+                                <td class="p-3 border-r border-slate-100">Setting IP Address & Subnetting</td>
+                                <td class="p-3 text-center bg-blue-50/30 border-r border-slate-100">
+                                    <input type="number" id="t3" oninput="calculateRow(3)" class="w-16 p-1 text-center border border-slate-300 rounded focus:border-blue-500 focus:outline-none" placeholder="0">
+                                </td>
+                                <td class="p-3 text-center bg-emerald-50/30 border-r border-slate-100">
+                                    <input type="number" id="p3" oninput="calculateRow(3)" class="w-16 p-1 text-center border border-slate-300 rounded focus:border-emerald-500 focus:outline-none" placeholder="0">
+                                </td>
+                                <td class="p-3 text-center font-bold text-slate-600 bg-slate-50" id="hasil3">-</td>
+                            </tr>
+
+                            <tr class="bg-amber-50/50">
+                                <td class="p-3 text-center border-r border-amber-100 font-bold text-amber-700">8</td>
+                                <td class="p-3 font-mono text-xs border-r border-amber-100">-</td>
+                                <td class="p-3 border-r border-amber-100 font-bold text-amber-800">Sikap Kerja (Kedisiplinan & Tanggung Jawab)</td>
+                                <td class="p-3 text-center border-r border-amber-100" colspan="2">
+                                    <select class="w-full p-1.5 border border-amber-300 rounded bg-white text-sm focus:outline-none cursor-pointer">
+                                        <option value="" disabled selected>Pilih Predikat</option>
+                                        <option>A (Sangat Baik)</option>
+                                        <option>B (Baik)</option>
+                                        <option>C (Cukup)</option>
+                                    </select>
+                                </td>
+                                <td class="p-3 text-center font-bold text-amber-700">-</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4 p-3 bg-white rounded-lg border border-slate-200 text-xs text-slate-500 flex flex-wrap gap-4 items-center">
+                    <span class="font-bold text-slate-700">Rumus:</span>
+                    <span>(Nilai Teori + Nilai Praktek) / 2 = Nilai Akhir</span>
+                </div>
+
+            </div>
+
+            <div class="bg-white px-6 py-4 border-t border-slate-200 flex justify-end gap-3">
+                <button type="button" onclick="closeModal('modalInputNilai')" class="px-5 py-2.5 text-slate-500 hover:bg-slate-100 rounded-xl font-bold transition">Batal</button>
+                <button type="button" onclick="saveGrades()" class="px-6 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 shadow-lg font-bold transition transform active:scale-95">Simpan Penilaian</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Update Title Dropdown
+        function updateTableTitle() {
+            const schoolName = document.getElementById('schoolSelect').value;
+            document.getElementById('displaySchool').innerText = schoolName;
+        }
+
+        // 2. Modal Logic
+        function openGradingModal(studentName) {
+            document.getElementById('modalStudentName').innerText = studentName;
+            document.getElementById('modalInputNilai').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // 3. Auto Calculation Logic
+        function calculateRow(id) {
+            const teori = parseFloat(document.getElementById('t' + id).value) || 0;
+            const praktek = parseFloat(document.getElementById('p' + id).value) || 0;
+            const output = document.getElementById('hasil' + id);
+
+            // Validasi Input
+            if (teori > 0 || praktek > 0) {
+                const rataRata = (teori + praktek) / 2;
+                output.innerText = rataRata.toFixed(1); // 1 desimal
+                
+                // Warna dinamis
+                if(rataRata >= 85) output.className = "p-3 text-center font-bold text-emerald-600 bg-emerald-50";
+                else if (rataRata >= 75) output.className = "p-3 text-center font-bold text-blue-600 bg-blue-50";
+                else output.className = "p-3 text-center font-bold text-red-500 bg-red-50";
+            } else {
+                output.innerText = "-";
+                output.className = "p-3 text-center font-bold text-slate-600 bg-slate-50";
+            }
+        }
+
+        function saveGrades() {
+            closeModal('modalInputNilai');
+            alert("Nilai berhasil disimpan!");
+        }
+    </script>
+
+</body>
+</html>

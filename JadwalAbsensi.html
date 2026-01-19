@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal & Absensi - Panel Instruktur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+        
+        .sidebar-active { background-color: #2563eb; color: white; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3); }
+        .animate-fade-in-down { animation: fadeInDown 0.3s ease-out; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Style Tab Switch */
+        .tab-active { background-color: #2563eb; color: white; border-color: #2563eb; }
+        .tab-inactive { background-color: white; color: #64748b; border-color: #e2e8f0; }
+        .tab-inactive:hover { background-color: #f8fafc; color: #334155; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <aside class="w-64 bg-slate-900 text-white flex-shrink-0 hidden md:flex flex-col transition-all duration-300">
+            <div class="p-6 flex items-center justify-center border-b border-slate-800">
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-blue-600 text-white text-xl font-bold mb-3 shadow-lg shadow-blue-500/40">IN</div>
+                    <h1 class="text-lg font-bold tracking-wide">PANEL INSTRUKTUR</h1>
+                    <p class="text-xs text-slate-400">LKP INDO JAYA</p>
+                </div>
+            </div>
+            <nav class="flex-1 mt-6 px-4 space-y-2 overflow-y-auto">
+                <a href="Dashboard Instruktur.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-home w-6"></i> <span>Beranda</span>
+                </a>
+                <p class="text-xs text-slate-500 uppercase font-bold mt-6 mb-2 px-4 tracking-wider">Kegiatan Belajar</p>
+                
+                <a href="JadwalAbsensi.html" class="sidebar-active flex items-center py-3 px-4 rounded-xl transition-all">
+                    <i class="fas fa-calendar-check w-6"></i> <span class="font-medium">Jadwal & Absensi</span>
+                </a>
+                <a href="BankMateri.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-book-open w-6"></i> <span>Bank Materi</span>
+                </a>
+                <a href="PenilaianSiswa.html" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-file-contract w-6"></i> <span>Penilaian Siswa</span>
+                </a>
+                <p class="text-xs text-slate-500 uppercase font-bold mt-6 mb-2 px-4 tracking-wider">Akun</p>
+                <a href="#" class="flex items-center py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fas fa-user-circle w-6"></i> <span>Profil Saya</span>
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-800">
+                <a href="index.html" class="flex items-center py-3 px-4 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all">
+                    <i class="fas fa-sign-out-alt w-6"></i> <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm border-b border-slate-200 h-16 flex items-center justify-between px-8 z-10">
+                <h2 class="text-xl font-bold text-slate-800">Agenda & Riwayat Mengajar</h2>
+                <div class="flex items-center gap-3">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-bold text-slate-800">Nanda Nurfaiz</p>
+                        <p class="text-xs text-slate-500">Instruktur Jaringan</p>
+                    </div>
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 border-2 border-blue-50 font-bold">NN</div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-8">
+                
+                <div class="flex gap-4 mb-8">
+                    <button id="btnAgenda" onclick="switchTab('agenda')" class="tab-active flex-1 py-3 rounded-xl font-bold shadow-sm border transition flex items-center justify-center gap-2 transform active:scale-95">
+                        <i class="fas fa-calendar-alt"></i> Agenda Mengajar
+                    </button>
+                    <button id="btnRiwayat" onclick="switchTab('riwayat')" class="tab-inactive flex-1 py-3 rounded-xl font-bold shadow-sm border transition flex items-center justify-center gap-2 transform active:scale-95">
+                        <i class="fas fa-history"></i> Riwayat Selesai
+                    </button>
+                </div>
+
+                <div id="viewAgenda" class="animate-fade-in-down">
+                    
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center gap-2 bg-white p-1 rounded-xl border border-slate-200 shadow-sm">
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold hover:bg-slate-200 transition"><i class="fas fa-chevron-left"></i></button>
+                            <span class="px-4 text-sm font-bold text-slate-700 min-w-[150px] text-center">Januari 2026</span>
+                            <button class="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold hover:bg-slate-200 transition"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                <span class="w-2 h-6 bg-blue-600 rounded-full"></span> Hari Ini
+                                <span class="text-xs font-normal text-slate-500 bg-slate-100 px-2 py-0.5 rounded ml-2">Kamis, 15 Jan</span>
+                            </h3>
+                            
+                            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-4 relative overflow-hidden group hover:shadow-md transition">
+                                <div class="absolute left-0 top-0 bottom-0 w-2 bg-emerald-500"></div>
+                                <div class="flex flex-col md:flex-row gap-6 items-center">
+                                    <div class="w-full md:w-auto min-w-[120px] text-center md:text-left border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pb-0 md:pr-6">
+                                        <span class="inline-block bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full mb-2 animate-pulse">Sedang Berlangsung</span>
+                                        <h4 class="text-3xl font-bold text-slate-800">08:00</h4>
+                                        <p class="text-sm text-slate-500">s.d 10:00 WIB</p>
+                                    </div>
+                                    <div class="flex-1 w-full text-center md:text-left">
+                                        <h4 class="text-xl font-bold text-blue-700 mb-1">SMKN 1 BINANGUN</h4>
+                                        <p class="text-sm font-semibold text-slate-600 mb-3">Jaringan - Kelas Alpha | Lab Jaringan 1</p>
+                                        <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 inline-flex items-center gap-2">
+                                            <i class="fas fa-book-reader text-blue-500"></i> 
+                                            <span class="text-sm text-slate-600">Topik: <span class="font-bold text-slate-800">Crimping Kabel UTP</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-2 w-full md:w-auto min-w-[180px]">
+                                        <button onclick="openModal('modalJurnal')" class="bg-blue-600 text-white px-5 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                                            <i class="fas fa-pen-fancy"></i> Isi Jurnal
+                                        </button>
+                                        <button onclick="openModal('modalMateri')" class="bg-white border border-slate-200 text-slate-600 px-5 py-3 rounded-xl font-bold hover:bg-slate-50 transition flex items-center justify-center gap-2">
+                                            <i class="fas fa-book"></i> Lihat Modul
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-400 mb-4 flex items-center gap-2 mt-8">
+                                <span class="w-2 h-6 bg-slate-300 rounded-full"></span> Besok
+                                <span class="text-xs font-normal text-slate-400 bg-slate-100 px-2 py-0.5 rounded ml-2">Jumat, 16 Jan</span>
+                            </h3>
+                            
+                            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 opacity-70 hover:opacity-100 transition cursor-pointer">
+                                <div class="flex flex-col md:flex-row gap-6 items-center">
+                                    <div class="min-w-[120px] text-center md:text-left">
+                                        <h4 class="text-2xl font-bold text-slate-600">08:00</h4>
+                                        <p class="text-sm text-slate-400">s.d 10:00 WIB</p>
+                                    </div>
+                                    <div class="flex-1 text-center md:text-left">
+                                        <h4 class="text-lg font-bold text-slate-700">SMKN 1 BINANGUN</h4>
+                                        <p class="text-sm text-slate-500">Jaringan - Kelas Alpha</p>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs font-bold text-slate-400 bg-slate-100 px-3 py-1 rounded-lg">Belum Mulai</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="viewRiwayat" class="hidden animate-fade-in-down">
+                    
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+                        <div class="border-l-2 border-slate-200 pl-8 space-y-10">
+                            
+                            <div class="relative">
+                                <div class="absolute -left-[39px] top-1 w-5 h-5 rounded-full bg-emerald-500 ring-4 ring-white"></div>
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+                                    <div>
+                                        <span class="inline-block bg-slate-100 text-slate-500 text-xs font-bold px-2 py-1 rounded mb-2">Senin, 12 Jan 2026</span>
+                                        <h4 class="text-xl font-bold text-slate-800">SMKN 1 BINANGUN</h4>
+                                        <p class="text-sm text-slate-500 font-medium">Kelas: Alpha • Materi: Konfigurasi IP Address</p>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <div class="text-center bg-green-50 border border-green-100 px-3 py-2 rounded-lg">
+                                            <p class="text-[10px] text-green-600 font-bold uppercase">Hadir</p>
+                                            <p class="text-lg font-bold text-green-700">28</p>
+                                        </div>
+                                        <div class="text-center bg-yellow-50 border border-yellow-100 px-3 py-2 rounded-lg">
+                                            <p class="text-[10px] text-yellow-600 font-bold uppercase">Sakit</p>
+                                            <p class="text-lg font-bold text-yellow-700">1</p>
+                                        </div>
+                                        <div class="text-center bg-red-50 border border-red-100 px-3 py-2 rounded-lg">
+                                            <p class="text-[10px] text-red-600 font-bold uppercase">Alfa</p>
+                                            <p class="text-lg font-bold text-red-700">1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button onclick="openModal('modalLihatLaporan')" class="text-sm font-bold text-blue-600 hover:text-blue-800 hover:underline flex items-center">
+                                        <i class="fas fa-file-alt mr-1"></i> Lihat Laporan Jurnal
+                                    </button>
+                                </div>
+                            </div>
+
+                             <div class="relative">
+                                <div class="absolute -left-[39px] top-1 w-5 h-5 rounded-full bg-emerald-500 ring-4 ring-white"></div>
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+                                    <div>
+                                        <span class="inline-block bg-slate-100 text-slate-500 text-xs font-bold px-2 py-1 rounded mb-2">Kamis, 08 Jan 2026</span>
+                                        <h4 class="text-xl font-bold text-slate-800">SMKN 1 BINANGUN</h4>
+                                        <p class="text-sm text-slate-500 font-medium">Kelas: Alpha • Materi: Pengenalan Topologi</p>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <div class="text-center bg-green-50 border border-green-100 px-3 py-2 rounded-lg">
+                                            <p class="text-[10px] text-green-600 font-bold uppercase">Hadir</p>
+                                            <p class="text-lg font-bold text-green-700">30</p>
+                                        </div>
+                                        <div class="text-center bg-blue-50 border border-blue-100 px-3 py-2 rounded-lg">
+                                            <p class="text-[10px] text-blue-600 font-bold uppercase">Status</p>
+                                            <p class="text-lg font-bold text-blue-700">Lengkap</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button onclick="openModal('modalLihatLaporan')" class="text-sm font-bold text-blue-600 hover:text-blue-800 hover:underline flex items-center">
+                                        <i class="fas fa-file-alt mr-1"></i> Lihat Laporan Jurnal
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <div id="modalJurnal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden animate-fade-in-down max-h-[90vh] flex flex-col">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg">Input Jurnal & Absensi</h3>
+                    <p class="text-xs text-slate-500">Sekolah: <span class="font-bold text-blue-600">SMKN 1 BINANGUN</span> (Kelas Alpha) | Kamis, 15 Jan 2026</p>
+                </div>
+                <button onclick="closeModal('modalJurnal')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto">
+                <form id="formJurnal" onsubmit="event.preventDefault(); submitJurnal();">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="text-sm font-bold text-blue-700 uppercase mb-3 border-b pb-2">1. Jurnal Materi</h4>
+                            <div class="mb-4">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Topik / Materi Hari Ini</label>
+                                <input type="text" value="Crimping Kabel UTP (Straight & Cross)" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500 font-medium text-slate-800">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Capaian / Progress</label>
+                                <textarea rows="3" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500 text-sm" placeholder="Contoh: Siswa sudah paham urutan warna kabel..."></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Catatan Estafet (Opsional)</label>
+                                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                                    <textarea rows="2" class="w-full bg-transparent border-none focus:ring-0 text-sm text-amber-900 placeholder-amber-400" placeholder="Pesan untuk pertemuan berikutnya..."></textarea>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Upload Foto Kegiatan</label>
+                                <input type="file" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-sm font-bold text-blue-700 uppercase mb-3 border-b pb-2">2. Absensi Siswa</h4>
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden max-h-[350px] overflow-y-auto">
+                                <table class="w-full text-left text-sm">
+                                    <thead class="bg-slate-100 text-slate-600 font-bold text-xs uppercase sticky top-0">
+                                        <tr>
+                                            <th class="px-4 py-2">Nama Siswa</th>
+                                            <th class="px-4 py-2 text-center">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-200">
+                                        <tr>
+                                            <td class="px-4 py-3 font-medium text-slate-700">Rizky Pratama</td>
+                                            <td class="px-4 py-3 text-center">
+                                                <div class="flex justify-center gap-1">
+                                                    <label class="cursor-pointer"><input type="radio" name="abs_1" class="peer sr-only" checked><span class="px-2 py-1 rounded text-xs font-bold border border-slate-200 peer-checked:bg-emerald-500 peer-checked:text-white hover:bg-slate-100">H</span></label>
+                                                    <label class="cursor-pointer"><input type="radio" name="abs_1" class="peer sr-only"><span class="px-2 py-1 rounded text-xs font-bold border border-slate-200 peer-checked:bg-yellow-400 peer-checked:text-white hover:bg-slate-100">S</span></label>
+                                                    <label class="cursor-pointer"><input type="radio" name="abs_1" class="peer sr-only"><span class="px-2 py-1 rounded text-xs font-bold border border-slate-200 peer-checked:bg-blue-400 peer-checked:text-white hover:bg-slate-100">I</span></label>
+                                                    <label class="cursor-pointer"><input type="radio" name="abs_1" class="peer sr-only"><span class="px-2 py-1 rounded text-xs font-bold border border-slate-200 peer-checked:bg-red-500 peer-checked:text-white hover:bg-slate-100">A</span></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 font-medium text-slate-700">Siti Aminah</td>
+                                            <td class="px-4 py-3 text-center">
+                                                <div class="flex justify-center gap-1">
+                                                    <label class="cursor-pointer"><input type="radio" name="abs_2" class="peer sr-only" checked><span class="px-2 py-1 rounded text-xs font-bold border border-slate-200 peer-checked:bg-emerald-500 peer-checked:text-white hover:bg-slate-100">H</span></label>
+                                                    <label class="cursor-pointer"><input type="radio" name="abs_2" class="peer sr-only"><span class="px-2 py-1 rounded text-xs font-bold border border-slate-200 peer-checked:bg-yellow-400 peer-checked:text-white hover:bg-slate-100">S</span></label>
+                                                    <label class="cursor-pointer"><input type="radio" name="abs_2" class="peer sr-only"><span class="px-2 py-1 rounded text-xs font-bold border border-slate-200 peer-checked:bg-blue-400 peer-checked:text-white hover:bg-slate-100">I</span></label>
+                                                    <label class="cursor-pointer"><input type="radio" name="abs_2" class="peer sr-only"><span class="px-2 py-1 rounded text-xs font-bold border border-slate-200 peer-checked:bg-red-500 peer-checked:text-white hover:bg-slate-100">A</span></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
+                        <button type="button" onclick="closeModal('modalJurnal')" class="px-6 py-2.5 text-slate-500 hover:bg-slate-100 rounded-xl font-bold transition">Batal</button>
+                        <button type="submit" class="px-6 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 shadow-lg font-bold transition transform hover:-translate-y-0.5">Simpan Laporan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalMateri" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-fade-in-down">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                <h3 class="font-bold text-slate-800 text-lg">Bank Materi: Jaringan</h3>
+                <button onclick="closeModal('modalMateri')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="p-6">
+                <p class="text-xs text-slate-500 font-bold uppercase mb-3">Materi Terkait Pertemuan Ini:</p>
+                <div class="space-y-3">
+                    <a href="#" class="flex items-center p-3 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50 transition group">
+                        <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-xl mr-3">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-slate-700 text-sm group-hover:text-blue-700">Panduan Crimping Kabel.pdf</h4>
+                            <p class="text-xs text-slate-400">1.2 MB • Diupload Admin</p>
+                        </div>
+                        <i class="fas fa-download text-slate-300 group-hover:text-blue-600"></i>
+                    </a>
+                </div>
+                <button onclick="window.location.href='BankMateri.html'" class="mt-6 w-full py-2.5 bg-slate-100 text-slate-600 font-bold rounded-xl hover:bg-slate-200 transition">Lihat Semua Materi</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalLihatLaporan" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-fade-in-down">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg">Detail Laporan Harian</h3>
+                    <p class="text-xs text-slate-500">Senin, 12 Jan 2026 | SMKN 1 BINANGUN</p>
+                </div>
+                <button onclick="closeModal('modalLihatLaporan')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="p-6 bg-slate-50/50">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 mb-4">
+                    <h4 class="text-sm font-bold text-slate-500 uppercase mb-2">Materi yang Diajarkan</h4>
+                    <p class="text-lg font-bold text-slate-800">Konfigurasi IP Address & Subnetting</p>
+                    <p class="text-sm text-slate-600 mt-1">Siswa mempraktekkan cara menghitung subnet dan setting IP static di Windows.</p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 mb-4">
+                    <div class="bg-green-50 border border-green-100 p-3 rounded-xl text-center">
+                        <span class="block text-2xl font-bold text-green-700">28</span>
+                        <span class="text-xs font-bold text-green-600 uppercase">Hadir</span>
+                    </div>
+                    <div class="bg-yellow-50 border border-yellow-100 p-3 rounded-xl text-center">
+                        <span class="block text-2xl font-bold text-yellow-700">1</span>
+                        <span class="text-xs font-bold text-yellow-600 uppercase">Sakit</span>
+                    </div>
+                    <div class="bg-red-50 border border-red-100 p-3 rounded-xl text-center">
+                        <span class="block text-2xl font-bold text-red-700">1</span>
+                        <span class="text-xs font-bold text-red-600 uppercase">Alfa</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-slate-200">
+                    <h4 class="text-sm font-bold text-slate-500 uppercase mb-3">Bukti Kegiatan</h4>
+                    <div class="h-40 bg-slate-200 rounded-lg flex flex-col items-center justify-center text-slate-400">
+                        <i class="fas fa-image text-3xl mb-2"></i>
+                        <span class="text-xs font-bold">Foto Kegiatan Siswa di Lab</span>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 py-4 bg-white border-t border-slate-200 flex justify-end">
+                <button onclick="closeModal('modalLihatLaporan')" class="px-6 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            const btnAgenda = document.getElementById('btnAgenda');
+            const btnRiwayat = document.getElementById('btnRiwayat');
+            const viewAgenda = document.getElementById('viewAgenda');
+            const viewRiwayat = document.getElementById('viewRiwayat');
+
+            if(tabName === 'agenda') {
+                viewAgenda.classList.remove('hidden');
+                viewRiwayat.classList.add('hidden');
+                btnAgenda.className = "tab-active flex-1 py-3 rounded-xl font-bold shadow-sm border transition flex items-center justify-center gap-2 transform active:scale-95";
+                btnRiwayat.className = "tab-inactive flex-1 py-3 rounded-xl font-bold shadow-sm border transition flex items-center justify-center gap-2 transform active:scale-95";
+            } else {
+                viewAgenda.classList.add('hidden');
+                viewRiwayat.classList.remove('hidden');
+                btnRiwayat.className = "tab-active flex-1 py-3 rounded-xl font-bold shadow-sm border transition flex items-center justify-center gap-2 transform active:scale-95";
+                btnAgenda.className = "tab-inactive flex-1 py-3 rounded-xl font-bold shadow-sm border transition flex items-center justify-center gap-2 transform active:scale-95";
+            }
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function submitJurnal() {
+            closeModal('modalJurnal');
+            alert("Laporan Jurnal & Absensi berhasil disimpan!");
+        }
+    </script>
+
+</body>
+</html>
