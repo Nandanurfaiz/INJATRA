@@ -49,7 +49,6 @@
                         <a href="MasterPenilaian.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Master Penilaian</a>
                     </div>
                 </div>
-
                 <div>
                     <button onclick="toggleMenu('menuOperasional')" class="w-full flex items-center justify-between py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all group">
                         <div class="flex items-center">
@@ -123,7 +122,6 @@
                                 <span class="text-blue-600">Lihat Data <i class="fas fa-arrow-right ml-1"></i></span>
                             </div>
                         </div>
-
                         <div onclick="showStudents('Beta', 'SMK YAPEK GOMBONG', 'Desain Grafis')" class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-purple-500 hover:shadow-lg transition cursor-pointer group">
                             <div class="flex justify-between items-start mb-4">
                                 <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 text-xl font-bold">B</div>
@@ -151,12 +149,10 @@
                                 <span class="text-orange-600">Lihat Data <i class="fas fa-arrow-right ml-1"></i></span>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <div id="viewStudentList" class="hidden animate-fade-in-down">
-                    
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                         <div>
                             <button onclick="showClassList()" class="text-sm font-bold text-slate-500 hover:text-emerald-600 mb-2 flex items-center gap-1 transition">
@@ -203,7 +199,6 @@
                                         </button>
                                     </td>
                                 </tr>
-
                                 <tr class="border-b border-slate-100 hover:bg-slate-50 transition student-row row-Beta hidden">
                                     <td class="py-4 px-6">
                                         <div class="flex items-center gap-3">
@@ -237,7 +232,6 @@
                                         </button>
                                     </td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -247,54 +241,113 @@
     </div>
 
     <div id="modalViewGrades" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden animate-fade-in-down flex flex-col max-h-[90vh]">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden animate-fade-in-down flex flex-col max-h-[90vh]">
             <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
                 <div>
-                    <h3 class="font-bold text-slate-800 text-lg">Transkrip Nilai Kompetensi</h3>
+                    <h3 class="font-bold text-slate-800 text-lg">Detail Capaian Kompetensi</h3>
                     <p class="text-xs text-slate-500">Siswa: <span id="modalStudentName" class="font-bold text-emerald-600">Nama Siswa</span></p>
                 </div>
                 <button onclick="document.getElementById('modalViewGrades').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
             </div>
             
             <div class="p-6 overflow-y-auto bg-slate-50/50 space-y-4">
-                <div class="bg-blue-600 text-white p-4 rounded-xl shadow-lg flex justify-between items-center">
-                    <div>
-                        <p class="text-xs opacity-80 uppercase font-bold tracking-wider">Program Keahlian</p>
-                        <h2 class="text-2xl font-bold" id="modalProgramName">Teknisi Jaringan</h2>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-3xl font-bold">86.5</p>
-                        <p class="text-xs opacity-80">Rata-rata Kumulatif</p>
+
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden p-6">
+                    <table class="w-full text-left border-collapse border border-slate-300 text-sm">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-800 font-bold text-center">
+                                <th rowspan="2" class="border border-slate-300 p-2 w-10">No</th>
+                                <th rowspan="2" class="border border-slate-300 p-2 w-32">Kode Unit Kompetensi</th>
+                                <th rowspan="2" class="border border-slate-300 p-2 text-left">Judul Unit Kompetensi</th>
+                                <th colspan="3" class="border border-slate-300 p-2">Nilai Yang Diperoleh</th>
+                            </tr>
+                            <tr class="bg-slate-100 text-slate-800 font-bold text-center">
+                                <th class="border border-slate-300 p-2 w-16">Teori</th>
+                                <th class="border border-slate-300 p-2 w-16">Praktek</th>
+                                <th class="border border-slate-300 p-2 w-20">Nilai Akhir</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-700">
+                            <tr>
+                                <td class="border border-slate-300 p-2 text-center">1</td>
+                                <td class="border border-slate-300 p-2 font-mono text-xs">JR.76500.001.09</td>
+                                <td class="border border-slate-300 p-2">Mampu mengakses dan memahami antarmuka MikroTik melalui Winbox</td>
+                                <td class="border border-slate-300 p-2 text-center">85</td>
+                                <td class="border border-slate-300 p-2 text-center">88</td>
+                                <td class="border border-slate-300 p-2 text-center font-bold">86.5</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-2 text-center">2</td>
+                                <td class="border border-slate-300 p-2 font-mono text-xs">JR.76500.002.09</td>
+                                <td class="border border-slate-300 p-2">Mampu menetapkan IP address</td>
+                                <td class="border border-slate-300 p-2 text-center">83</td>
+                                <td class="border border-slate-300 p-2 text-center">87</td>
+                                <td class="border border-slate-300 p-2 text-center font-bold">85</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-2 text-center">3</td>
+                                <td class="border border-slate-300 p-2 font-mono text-xs">JR.76500.003.09</td>
+                                <td class="border border-slate-300 p-2">Mampu menyetting DHCP, DNS, NAT, dan gateway</td>
+                                <td class="border border-slate-300 p-2 text-center">88</td>
+                                <td class="border border-slate-300 p-2 text-center">90</td>
+                                <td class="border border-slate-300 p-2 text-center font-bold">89</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-2 text-center">4</td>
+                                <td class="border border-slate-300 p-2 font-mono text-xs">JR.76500.004.09</td>
+                                <td class="border border-slate-300 p-2">Mampu mengkonfigurasi VLAN</td>
+                                <td class="border border-slate-300 p-2 text-center"></td>
+                                <td class="border border-slate-300 p-2 text-center"></td>
+                                <td class="border border-slate-300 p-2 text-center font-bold"></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-2 text-center">5</td>
+                                <td class="border border-slate-300 p-2 font-mono text-xs">JR.76500.005.09</td>
+                                <td class="border border-slate-300 p-2">Mampu mengkonfigurasi Wireless dan Hotspot</td>
+                                <td class="border border-slate-300 p-2 text-center"></td>
+                                <td class="border border-slate-300 p-2 text-center"></td>
+                                <td class="border border-slate-300 p-2 text-center font-bold"></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-2 text-center">6</td>
+                                <td class="border border-slate-300 p-2 font-mono text-xs">JR.76500.006.09</td>
+                                <td class="border border-slate-300 p-2">Mampu mengubah tampilan Hotspot</td>
+                                <td class="border border-slate-300 p-2 text-center"></td>
+                                <td class="border border-slate-300 p-2 text-center"></td>
+                                <td class="border border-slate-300 p-2 text-center font-bold"></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-2 text-center">7</td>
+                                <td class="border border-slate-300 p-2 font-mono text-xs">JR.76500.011.09</td>
+                                <td class="border border-slate-300 p-2">Mampu menyetting keamanan (WPA2) pada Mikrotik</td>
+                                <td class="border border-slate-300 p-2 text-center"></td>
+                                <td class="border border-slate-300 p-2 text-center"></td>
+                                <td class="border border-slate-300 p-2 text-center font-bold"></td>
+                            </tr>
+                            <tr class="bg-slate-50 font-semibold">
+                                <td class="border border-slate-300 p-2 text-center">8</td>
+                                <td class="border border-slate-300 p-2 text-center">Sikap Kerja</td>
+                                <td class="border border-slate-300 p-2"></td>
+                                <td class="border border-slate-300 p-2 text-center">-</td>
+                                <td class="border border-slate-300 p-2 text-center">-</td>
+                                <td class="border border-slate-300 p-2 text-center">B+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="mt-4 text-xs text-slate-600">
+                        <p class="font-bold mb-1">Keterangan:</p>
+                        <div class="grid grid-cols-2 gap-x-8 gap-y-1">
+                            <div>A &nbsp;&nbsp;&nbsp;: 95-100 (Sangat Baik Dan Konsisten)</div>
+                            <div>B &nbsp;&nbsp;&nbsp;: 83 - 86 (Baik Dan Cukup Konsisten)</div>
+                            <div>A- &nbsp;&nbsp;: 91 - 94 (Sangat Baik Dan Cukup Konsisten)</div>
+                            <div>B- &nbsp;&nbsp;: 79 - 82 (Baik Dan Tidak Konsisten)</div>
+                            <div>B+ &nbsp;&nbsp;: 87 - 90 (Baik Dan Konsisten)</div>
+                            <div>C+ &nbsp;&nbsp;: 75 - 78 (Cukup Dan Konsisten)</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                    <button class="w-full px-5 py-3 bg-white hover:bg-slate-50 flex justify-between items-center transition" onclick="toggleAccordion('unit1')">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">1</div>
-                            <div class="text-left">
-                                <h4 class="font-bold text-slate-700 text-sm">Teknik Crimping / Desain Dasar</h4>
-                                <p class="text-xs text-slate-400">Unit Kompetensi 1</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-sm font-bold text-emerald-600">86.5 (A)</span>
-                            <i id="icon-unit1" class="fas fa-chevron-down text-slate-300 text-xs transition-transform"></i>
-                        </div>
-                    </button>
-                    <div id="unit1" class="hidden border-t border-slate-100 p-4 bg-slate-50">
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div class="bg-white p-3 rounded border border-slate-200 text-center">
-                                <p class="text-xs text-slate-500 uppercase mb-1">Nilai Teori</p>
-                                <p class="font-bold text-slate-800 text-lg">85</p>
-                            </div>
-                            <div class="bg-white p-3 rounded border border-slate-200 text-center">
-                                <p class="text-xs text-slate-500 uppercase mb-1">Nilai Praktek</p>
-                                <p class="font-bold text-slate-800 text-lg">88</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -310,6 +363,22 @@
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div><label class="block text-slate-700 text-xs font-bold mb-2">Nama Lengkap</label><input type="text" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 transition"></div>
                         <div><label class="block text-slate-700 text-xs font-bold mb-2">NIS / ID</label><input type="text" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 transition"></div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-slate-700 text-xs font-bold mb-2">Asal Sekolah</label>
+                        <select class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white">
+                            <option>SMKN 1 BINANGUN</option>
+                            <option>SMK YAPEK GOMBONG</option>
+                            <option>SMK PURNAMA 2</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-slate-700 text-xs font-bold mb-2">Program Pilihan</label>
+                        <select class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white">
+                            <option>Teknisi Jaringan</option>
+                            <option>Desain Grafis</option>
+                            <option>Perakitan Komputer</option>
+                        </select>
                     </div>
                     <div class="flex items-center justify-end gap-3">
                         <button type="button" onclick="document.getElementById('modalAddStudent').classList.add('hidden')" class="px-5 py-2 text-slate-500 hover:bg-slate-100 rounded-xl font-medium transition">Batal</button>
@@ -362,21 +431,12 @@
             });
         }
 
-        function toggleAccordion(id) {
-            const content = document.getElementById(id);
-            const icon = document.getElementById('icon-' + id);
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.classList.add('rotate-180');
-            } else {
-                content.classList.add('hidden');
-                icon.classList.remove('rotate-180');
-            }
-        }
-
+        // Tidak lagi menggunakan accordion karena format berubah menjadi tabel statis
+        
         function openTranscript(name, program) {
             document.getElementById('modalStudentName').innerText = name;
-            document.getElementById('modalProgramName').innerText = program;
+            // Jika program berbeda, konten tabel bisa diubah secara dinamis disini
+            // Untuk contoh ini, kita asumsikan konten statis sesuai gambar untuk semua siswa Jaringan
             document.getElementById('modalViewGrades').classList.remove('hidden');
         }
     </script>
