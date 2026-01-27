@@ -287,40 +287,94 @@
         </div>
     </div>
 
-    <div id="modalRolling" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in-down">
-            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+    <div id="modalRolling" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-fade-in-down">
+            <div class="bg-white px-6 py-4 border-b border-slate-100 flex justify-between items-center">
                 <h3 class="font-bold text-slate-800 text-lg">Rolling Program & Pengajar</h3>
-                <button onclick="closeModal('modalRolling')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
+                <button onclick="document.getElementById('modalRolling').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
             </div>
+            
             <div class="p-6">
-                <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 mb-4 text-xs text-blue-800">
-                    <span class="font-bold">Kelas Target:</span> SMKN 1 BINANGUN - Kelas Alpha
+                <div class="bg-blue-50 border border-blue-100 text-blue-700 px-4 py-3 rounded-xl text-sm font-medium mb-4 flex items-center gap-2">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Kelas Target: <b>SMKN 1 BINANGUN - Kelas Alpha</b></span>
                 </div>
-                <form onsubmit="event.preventDefault(); saveRolling();">
+
+                <form onsubmit="event.preventDefault(); alert('Program kelas berhasil di-rolling!'); document.getElementById('modalRolling').classList.add('hidden');">
+                    
                     <div class="mb-4">
-                        <label class="block text-xs font-bold text-slate-700 mb-1 uppercase">Pilih Program Selanjutnya</label>
-                        <select class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white">
-                            <option>Perakitan Komputer</option>
-                            <option>Desain Grafis</option>
-                            <option>Sablon</option>
+                        <label class="block text-slate-700 text-xs font-bold mb-2 uppercase tracking-wide">Pilih Program Selanjutnya</label>
+                        <select id="selectProgram" onchange="filterInstructors()" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500 bg-white text-slate-700 font-medium transition">
+                            <option value="">-- Pilih Program --</option>
+                            <option value="Jaringan">Teknisi Jaringan</option>
+                            <option value="Perakitan">Perakitan Komputer</option>
+                            <option value="Desain">Desain Grafis</option>
+                            <option value="Web">Pemrograman Web</option>
                         </select>
                     </div>
+
                     <div class="mb-6">
-                        <label class="block text-xs font-bold text-slate-700 mb-1 uppercase">Instruktur Pengampu</label>
-                        <select class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white">
-                            <option>Sulthanah Jihan (Perakitan)</option>
-                            <option>Adita Dwi Cahyo (Desain/Sablon)</option>
-                        </select>
+                        <label class="block text-slate-700 text-xs font-bold mb-2 uppercase tracking-wide">Instruktur Pengampu</label>
+                        <select id="selectInstruktur" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500 bg-white text-slate-700 font-medium transition disabled:bg-slate-100 disabled:text-slate-400" disabled>
+                            <option value="">-- Pilih Program Terlebih Dahulu --</option>
+                            </select>
+                        <p class="text-[10px] text-slate-400 mt-1 italic">*Hanya menampilkan instruktur dengan kompetensi terkait.</p>
                     </div>
-                    <div class="flex justify-end gap-3">
-                        <button type="button" onclick="closeModal('modalRolling')" class="px-5 py-2 text-slate-500 hover:bg-slate-100 rounded-xl font-bold transition">Batal</button>
-                        <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 font-bold transition shadow-lg transform active:scale-95">Simpan Perubahan</button>
+
+                    <div class="flex items-center justify-end gap-3 pt-2">
+                        <button type="button" onclick="document.getElementById('modalRolling').classList.add('hidden')" class="px-5 py-2.5 text-slate-500 hover:bg-slate-50 rounded-xl text-sm font-bold transition">Batal</button>
+                        <button type="submit" class="px-6 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 text-sm font-bold shadow-lg shadow-blue-500/30 transition transform active:scale-95">Simpan Perubahan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        // ... (Script toggleMenu yang sudah ada) ...
+
+        // DATA SIMULASI UNTUK FILTER (Mapping Kompetensi -> Instruktur)
+        const instructorData = {
+            'Jaringan': [
+                { name: 'Nanda Nurfaiz', id: '1' },
+                { name: 'Budi Santoso (Cadangan)', id: '5' }
+            ],
+            'Perakitan': [
+                { name: 'Sulthanah Jihan', id: '4' }
+            ],
+            'Desain': [
+                { name: 'Adita Dwi Cahyo', id: '3' }
+            ],
+            'Web': [
+                { name: 'Ma\'rifatun Wulandari', id: '2' }
+            ]
+        };
+
+        function filterInstructors() {
+            const program = document.getElementById('selectProgram').value;
+            const instrukturSelect = document.getElementById('selectInstruktur');
+            
+            // Reset dropdown instruktur
+            instrukturSelect.innerHTML = '<option value="">-- Pilih Instruktur --</option>';
+            
+            if (program && instructorData[program]) {
+                // Aktifkan dropdown
+                instrukturSelect.disabled = false;
+                
+                // Isi opsi sesuai data mapping
+                instructorData[program].forEach(inst => {
+                    const option = document.createElement('option');
+                    option.value = inst.id;
+                    option.text = inst.name;
+                    instrukturSelect.appendChild(option);
+                });
+            } else {
+                // Matikan dropdown jika belum pilih program
+                instrukturSelect.innerHTML = '<option value="">-- Pilih Program Terlebih Dahulu --</option>';
+                instrukturSelect.disabled = true;
+            }
+        }
+    </script>
 
     <div id="modalEditClass" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in-down">
