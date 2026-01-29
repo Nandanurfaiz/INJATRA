@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadwal Program - LKP Indo Jaya</title>
+    <title>Jadwal Program - Admin LKP Indo Jaya</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -39,6 +39,20 @@
                 </a>
                 
                 <div>
+                    <button onclick="toggleMenu('menuAkademik')" class="w-full flex items-center justify-between py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all group">
+                        <div class="flex items-center">
+                            <i class="fas fa-graduation-cap w-6 group-hover:text-emerald-400 transition-colors"></i>
+                            <span class="font-medium">Akademik</span>
+                        </div>
+                        <i id="arrowAkademik" class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div id="menuAkademik" class="hidden pl-11 pr-2 space-y-1 mt-1">
+                        <a href="DataSiswa.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Data Siswa</a>
+                        <a href="MasterPenilaian.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Master Penilaian</a>
+                    </div>
+                </div>
+
+                <div>
                     <button onclick="toggleMenu('menuOperasional')" class="w-full flex items-center justify-between py-3 px-4 rounded-xl text-white bg-slate-800 transition-all group">
                         <div class="flex items-center">
                             <i class="fas fa-cogs w-6 text-emerald-400"></i>
@@ -50,20 +64,6 @@
                         <a href="ManajemenKelas.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Manajemen Kelas</a>
                         <a href="DataInstruktur.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Data Instruktur</a>
                         <a href="JadwalProgram.html" class="sub-item-active block py-2 px-3 rounded-lg text-sm transition">Jadwal Program</a>
-                    </div>
-                </div>
-
-                <div>
-                    <button onclick="toggleMenu('menuAkademik')" class="w-full flex items-center justify-between py-3 px-4 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all group">
-                        <div class="flex items-center">
-                            <i class="fas fa-graduation-cap w-6 group-hover:text-emerald-400 transition-colors"></i>
-                            <span class="font-medium">Akademik</span>
-                        </div>
-                        <i id="arrowAkademik" class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
-                    </button>
-                    <div id="menuAkademik" class="hidden pl-11 pr-2 space-y-1 mt-1">
-                        <a href="DataSiswa.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Data Siswa</a>
-                        <a href="MasterPenilaian.html" class="block py-2 px-3 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">Master Penilaian</a>
                     </div>
                 </div>
 
@@ -90,14 +90,29 @@
 
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="bg-white shadow-sm border-b border-slate-200 h-16 flex items-center justify-between px-8 z-10">
-                <h2 class="text-xl font-bold text-slate-800">Agenda Kegiatan & Jadwal</h2>
-                <button onclick="openModal('modalAddSchedule')" class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-emerald-700 shadow-lg shadow-emerald-500/30 transition flex items-center gap-2 transform active:scale-95">
-                    <i class="fas fa-plus"></i> Tambah Jadwal Manual
-                </button>
+                <h2 class="text-xl font-bold text-slate-800">Jadwal Program</h2>
+                
+                <div class="flex items-center gap-3">
+                    <div class="text-right hidden md:block">
+                        <p class="text-sm font-bold text-slate-800">Administrator</p>
+                    </div>
+                    <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 border-2 border-emerald-200 font-bold">A</div>
+                </div>
             </header>
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-8">
                 
+                <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-700">Agenda Kegiatan</h3>
+                        <p class="text-xs text-slate-500">Kelola jadwal harian dan bulanan instruktur.</p>
+                    </div>
+                    
+                    <button onclick="openModal('modalAddSchedule')" class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-emerald-700 shadow-lg shadow-emerald-500/30 transition flex items-center gap-2 transform active:scale-95">
+                        <i class="fas fa-plus"></i> Tambah Jadwal Manual
+                    </button>
+                </div>
+
                 <div class="bg-white p-2 rounded-2xl shadow-sm border border-slate-200 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <div class="flex items-center bg-slate-100 rounded-xl p-1">
                         <button id="btnMinggu" onclick="switchView('minggu')" class="px-6 py-2 rounded-lg text-sm font-bold bg-white text-emerald-700 shadow-sm transition-all">Minggu Ini</button>
@@ -276,36 +291,57 @@
     </div>
 
     <div id="modalAddSchedule" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in-down">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-fade-in-down">
             <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
                 <h3 class="font-bold text-slate-800 text-lg">Tambah Jadwal Manual</h3>
                 <button onclick="closeModal('modalAddSchedule')" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
             </div>
             <div class="p-6">
                 <form onsubmit="event.preventDefault(); alert('Jadwal berhasil ditambahkan!'); closeModal('modalAddSchedule');">
-                    <div class="mb-4">
-                        <label class="block text-slate-700 text-sm font-bold mb-2">Pilih Kelas</label>
-                        <select class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white">
-                            <option>Jaringan - Kelas Alpha</option>
-                            <option>Desain - Kelas Beta</option>
-                            <option>Pemrograman - Kelas Charlie</option>
-                        </select>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase mb-3">Detail Kelas</h4>
+                            <div class="mb-4">
+                                <label class="block text-slate-700 text-sm font-bold mb-2">Pilih Kelas</label>
+                                <select class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white text-slate-700">
+                                    <option>Jaringan - Kelas Alpha</option>
+                                    <option>Desain - Kelas Beta</option>
+                                    <option>Pemrograman - Kelas Charlie</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-slate-700 text-sm font-bold mb-2">Instruktur</label>
+                                <select class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white text-slate-700">
+                                    <option>Nanda Nurfaiz</option>
+                                    <option>Adita Dwi Cahyo</option>
+                                    <option>Ma'rifatun W.</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase mb-3">Waktu Pelaksanaan</h4>
+                            <div class="mb-4">
+                                <label class="block text-slate-700 text-sm font-bold mb-2">Tanggal</label>
+                                <input type="date" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 text-slate-700">
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-1/2">
+                                    <label class="block text-slate-700 text-sm font-bold mb-2">Jam Mulai</label>
+                                    <input type="time" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 text-slate-700">
+                                </div>
+                                <div class="w-1/2">
+                                    <label class="block text-slate-700 text-sm font-bold mb-2">Jam Selesai</label>
+                                    <input type="time" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 text-slate-700">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-slate-700 text-sm font-bold mb-2">Instruktur</label>
-                        <select class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white">
-                            <option>Nanda Nurfaiz</option>
-                            <option>Adita Dwi Cahyo</option>
-                            <option>Ma'rifatun W.</option>
-                        </select>
-                    </div>
-                    <div class="flex gap-4 mb-4">
-                        <div class="w-1/2"><label class="block text-slate-700 text-sm font-bold mb-2">Jam Mulai</label><input type="time" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500"></div>
-                        <div class="w-1/2"><label class="block text-slate-700 text-sm font-bold mb-2">Jam Selesai</label><input type="time" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500"></div>
-                    </div>
-                    <div class="flex items-center justify-end gap-3">
+
+                    <div class="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-slate-100">
                         <button type="button" onclick="closeModal('modalAddSchedule')" class="px-5 py-2 text-slate-500 hover:bg-slate-100 rounded-xl font-medium transition">Batal</button>
-                        <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 font-bold transition">Simpan</button>
+                        <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 font-bold transition shadow-lg">Simpan</button>
                     </div>
                 </form>
             </div>
