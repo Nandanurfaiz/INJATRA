@@ -20,6 +20,11 @@
         .tab-btn-active { background-color: #eff6ff; color: #1d4ed8; border-bottom: 2px solid #2563eb; font-weight: 700; }
         .tab-btn-inactive { color: #64748b; hover:text-slate-800; font-weight: 500; border-bottom: 2px solid transparent; }
         .tab-btn-inactive:hover { background-color: #f8fafc; }
+
+        /* Style khusus tab modal */
+        .modal-tab-active { border-bottom: 2px solid #2563eb; color: #2563eb; font-weight: 600; }
+        .modal-tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
+        .modal-tab-inactive:hover { color: #334155; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -116,64 +121,31 @@
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        
                         <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition group relative file-card">
                             <div class="flex items-start justify-between mb-2">
-                                <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-xl">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <button onclick="deleteFile(this)" class="text-slate-300 hover:text-red-500 p-1 rounded transition" title="Hapus File">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
+                                <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-xl"><i class="fas fa-file-pdf"></i></div>
+                                <button onclick="deleteFile(this)" class="text-slate-300 hover:text-red-500 p-1 rounded transition" title="Hapus File"><i class="fas fa-trash-alt"></i></button>
                             </div>
                             <h4 class="font-bold text-slate-800 text-sm mb-1 group-hover:text-blue-600 transition">Panduan Crimping Kabel.pdf</h4>
                             <p class="text-xs text-slate-500 mb-4">1.2 MB • Diupload Admin</p>
                             <div class="flex justify-between items-center border-t border-slate-100 pt-3">
                                 <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded">Modul Dasar</span>
-                                <button onclick="downloadFile('Panduan Crimping Kabel.pdf')" class="text-blue-600 hover:text-blue-800 text-sm font-bold flex items-center gap-1">
-                                    <i class="fas fa-download"></i> Unduh
-                                </button>
+                                <button onclick="downloadFile('Panduan Crimping Kabel.pdf')" class="text-blue-600 hover:text-blue-800 text-sm font-bold flex items-center gap-1"><i class="fas fa-download"></i> Unduh</button>
                             </div>
                         </div>
 
                         <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition group relative file-card">
                             <div class="flex items-start justify-between mb-2">
-                                <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xl">
-                                    <i class="fas fa-video"></i>
-                                </div>
-                                <button onclick="deleteFile(this)" class="text-slate-300 hover:text-red-500 p-1 rounded transition" title="Hapus File">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
+                                <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xl"><i class="fas fa-video"></i></div>
+                                <button onclick="deleteFile(this)" class="text-slate-300 hover:text-red-500 p-1 rounded transition" title="Hapus File"><i class="fas fa-trash-alt"></i></button>
                             </div>
                             <h4 class="font-bold text-slate-800 text-sm mb-1 group-hover:text-blue-600 transition">Tutorial Winbox Dasar</h4>
                             <p class="text-xs text-slate-500 mb-4">Link Youtube • Diupload Nanda</p>
                             <div class="flex justify-between items-center border-t border-slate-100 pt-3">
                                 <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded">Video</span>
-                                <button onclick="openLink('https://youtube.com')" class="text-blue-600 hover:text-blue-800 text-sm font-bold flex items-center gap-1">
-                                    <i class="fas fa-external-link-alt"></i> Buka Link
-                                </button>
+                                <button onclick="openLink('https://youtube.com')" class="text-blue-600 hover:text-blue-800 text-sm font-bold flex items-center gap-1"><i class="fas fa-external-link-alt"></i> Buka Link</button>
                             </div>
                         </div>
-
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition group relative file-card">
-                            <div class="flex items-start justify-between mb-2">
-                                <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center text-xl">
-                                    <i class="fas fa-file-powerpoint"></i>
-                                </div>
-                                <button onclick="deleteFile(this)" class="text-slate-300 hover:text-red-500 p-1 rounded transition" title="Hapus File">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                            <h4 class="font-bold text-slate-800 text-sm mb-1 group-hover:text-blue-600 transition">Slide Presentasi Topologi</h4>
-                            <p class="text-xs text-slate-500 mb-4">5 MB • Diupload Admin</p>
-                            <div class="flex justify-between items-center border-t border-slate-100 pt-3">
-                                <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded">Presentasi</span>
-                                <button onclick="downloadFile('Slide Topologi.ppt')" class="text-blue-600 hover:text-blue-800 text-sm font-bold flex items-center gap-1">
-                                    <i class="fas fa-download"></i> Unduh
-                                </button>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
@@ -203,17 +175,6 @@
                                         <button onclick="openLinkModal(this)" class="w-full text-left px-3 py-2 bg-blue-50 border border-blue-200 rounded-lg text-blue-700 text-xs font-bold hover:bg-blue-100 transition flex items-center justify-between group">
                                             <span class="file-label"><i class="fas fa-paperclip mr-1"></i> Panduan Crimping.pdf</span>
                                             <i class="fas fa-edit opacity-0 group-hover:opacity-100 transition"></i>
-                                        </button>
-                                    </td>
-                                    <td class="p-4 text-center align-middle"><button onclick="deleteRow(this)" class="text-slate-300 hover:text-red-500"><i class="fas fa-trash-alt"></i></button></td>
-                                </tr>
-                                <tr class="hover:bg-slate-50 transition silabus-row">
-                                    <td class="p-4 text-center align-middle"><div class="bg-slate-800 text-white font-bold w-8 h-8 rounded flex items-center justify-center mx-auto row-number">2</div></td>
-                                    <td class="p-4 align-middle"><input type="text" value="Konfigurasi Dasar Mikrotik" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 font-bold text-slate-700"></td>
-                                    <td class="p-4 align-middle">
-                                        <button onclick="openLinkModal(this)" class="w-full text-left px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-400 text-xs font-bold hover:bg-slate-100 transition flex items-center justify-between group">
-                                            <span class="file-label">+ Pautkan File dari Repo</span>
-                                            <i class="fas fa-plus opacity-0 group-hover:opacity-100 transition"></i>
                                         </button>
                                     </td>
                                     <td class="p-4 text-center align-middle"><button onclick="deleteRow(this)" class="text-slate-300 hover:text-red-500"><i class="fas fa-trash-alt"></i></button></td>
@@ -264,25 +225,44 @@
     <div id="modalUpload" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 modal p-4">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-fade-in-down">
             <div class="bg-slate-50 px-6 py-4 flex justify-between items-center border-b border-slate-200">
-                <h3 class="font-bold text-slate-800">Upload File Baru</h3>
+                <h3 class="font-bold text-slate-800">Tambah Materi Baru</h3>
                 <button onclick="closeModal('modalUpload')"><i class="fas fa-times"></i></button>
             </div>
+            
+            <div class="flex border-b border-slate-200">
+                <button id="modalTabFile" onclick="switchModalTab('file')" class="w-1/2 py-3 text-sm font-bold text-center transition modal-tab-active">Upload File</button>
+                <button id="modalTabYoutube" onclick="switchModalTab('youtube')" class="w-1/2 py-3 text-sm font-bold text-center transition modal-tab-inactive">Link Youtube</button>
+            </div>
+
             <div class="p-6">
                 <form id="formUpload" onsubmit="event.preventDefault(); submitUpload();">
+                    
                     <div class="mb-4">
-                        <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">Judul File</label>
-                        <input id="uploadTitle" type="text" placeholder="Masukkan judul..." class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none" required>
+                        <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">Judul Materi</label>
+                        <input id="uploadTitle" type="text" placeholder="Masukkan judul..." class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none transition" required>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">File</label>
-                        <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center cursor-pointer hover:bg-slate-50">
-                            <i class="fas fa-cloud-upload-alt text-3xl text-slate-400 mb-2"></i>
-                            <p class="text-sm text-slate-500">Klik untuk pilih file</p>
+
+                    <div id="modalContentFile">
+                        <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">Pilih File</label>
+                        <div class="border-2 border-dashed border-slate-300 rounded-xl p-8 text-center cursor-pointer hover:bg-slate-50 hover:border-blue-400 transition group">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-slate-400 mb-2 group-hover:text-blue-500 transition"></i>
+                            <p class="text-sm text-slate-500 font-medium">Klik untuk pilih file</p>
+                            <p class="text-xs text-slate-400 mt-1">PDF, PPT, DOCX (Max 10MB)</p>
                         </div>
                     </div>
-                    <div class="flex justify-end gap-3">
-                        <button type="button" onclick="closeModal('modalUpload')" class="px-5 py-2 text-slate-500 hover:bg-slate-100 rounded-xl font-bold">Batal</button>
-                        <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-lg">Upload</button>
+
+                    <div id="modalContentYoutube" class="hidden">
+                        <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">URL Youtube</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-red-500"><i class="fab fa-youtube text-lg"></i></span>
+                            <input id="uploadLink" type="url" placeholder="https://www.youtube.com/watch?v=..." class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-xl focus:border-red-500 focus:outline-none transition">
+                        </div>
+                        <p class="text-[10px] text-slate-400 mt-2 italic">*Pastikan link video bersifat publik atau tidak terdaftar.</p>
+                    </div>
+
+                    <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-100">
+                        <button type="button" onclick="closeModal('modalUpload')" class="px-5 py-2 text-slate-500 hover:bg-slate-100 rounded-xl font-bold transition">Batal</button>
+                        <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-lg transition">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -291,8 +271,9 @@
 
     <script>
         let currentButton = null;
+        let activeModalTab = 'file'; // Default tab modal
 
-        // 1. Tab Switching
+        // --- TAB PAGE UTAMA ---
         function switchTab(tabName) {
             const btnRepo = document.getElementById('tabRepo');
             const btnSilabus = document.getElementById('tabSilabus');
@@ -312,42 +293,64 @@
             }
         }
 
-        // 2. Modal Logic
+        // --- TAB MODAL UPLOAD ---
+        function switchModalTab(tab) {
+            activeModalTab = tab;
+            const btnFile = document.getElementById('modalTabFile');
+            const btnYoutube = document.getElementById('modalTabYoutube');
+            const contentFile = document.getElementById('modalContentFile');
+            const contentYoutube = document.getElementById('modalContentYoutube');
+
+            if (tab === 'file') {
+                btnFile.className = "w-1/2 py-3 text-sm font-bold text-center transition modal-tab-active";
+                btnYoutube.className = "w-1/2 py-3 text-sm font-bold text-center transition modal-tab-inactive";
+                contentFile.classList.remove('hidden');
+                contentYoutube.classList.add('hidden');
+            } else {
+                btnFile.className = "w-1/2 py-3 text-sm font-bold text-center transition modal-tab-inactive";
+                btnYoutube.className = "w-1/2 py-3 text-sm font-bold text-center transition modal-tab-active";
+                contentFile.classList.add('hidden');
+                contentYoutube.classList.remove('hidden');
+            }
+        }
+
+        // --- MODAL UTILS ---
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        // 3. Repository Actions (HAPUS, DOWNLOAD, BUKA)
+        // --- UPLOAD SUBMIT ---
+        function submitUpload() {
+            const title = document.getElementById('uploadTitle').value;
+            let message = '';
+            
+            if (activeModalTab === 'file') {
+                message = `File "${title}" berhasil diupload!`;
+            } else {
+                const link = document.getElementById('uploadLink').value;
+                message = `Link Youtube "${title}" berhasil disimpan!`;
+            }
+            
+            closeModal('modalUpload');
+            alert(message);
+            document.getElementById('formUpload').reset();
+            switchModalTab('file'); // Reset ke tab awal
+        }
+
+        // ... (Fungsi deleteFile, downloadFile, openLink, dll tetap sama) ...
         function deleteFile(btn) {
-            if(confirm("Apakah Anda yakin ingin menghapus file ini dari repository?")) {
-                const card = btn.closest('.file-card');
-                card.remove(); // Hapus kartu dari DOM
+            if(confirm("Apakah Anda yakin ingin menghapus file ini?")) {
+                btn.closest('.file-card').remove();
                 alert("File berhasil dihapus.");
             }
         }
-
-        function downloadFile(filename) {
-            alert("Sedang mengunduh file: " + filename);
-        }
-
-        function openLink(url) {
-            if(confirm("Anda akan diarahkan ke link eksternal. Lanjutkan?")) {
-                window.open(url, '_blank');
-            }
-        }
-
-        function submitUpload() {
-            const title = document.getElementById('uploadTitle').value;
-            closeModal('modalUpload');
-            alert('File "' + title + '" berhasil diupload!');
-            document.getElementById('formUpload').reset();
-        }
-
-        // 4. Silabus Logic (PAUTKAN, HAPUS BARIS, TAMBAH BARIS)
+        function downloadFile(name) { alert("Mengunduh " + name); }
+        function openLink(url) { if(confirm("Buka link eksternal?")) window.open(url, '_blank'); }
+        
+        // --- SILABUS LOGIC ---
         function openLinkModal(btn) {
             currentButton = btn;
             openModal('modalLinkFile');
         }
-
         function saveLinkedFile() {
             const selected = document.querySelector('input[name="selectedFile"]:checked');
             if (selected && currentButton) {
@@ -359,38 +362,21 @@
                 alert("Pilih salah satu file terlebih dahulu!");
             }
         }
-
         function addSilabusRow() {
             const tbody = document.getElementById('silabusBody');
             const rowCount = tbody.getElementsByTagName('tr').length + 1;
             const newRow = document.createElement('tr');
             newRow.className = "hover:bg-slate-50 transition silabus-row";
-            newRow.innerHTML = `
-                <td class="p-4 text-center align-middle"><div class="bg-slate-200 text-slate-500 font-bold w-8 h-8 rounded flex items-center justify-center mx-auto row-number">${rowCount}</div></td>
-                <td class="p-4 align-middle"><input type="text" placeholder="Isi judul..." class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 font-bold text-slate-700 transition"></td>
-                <td class="p-4 align-middle">
-                    <button onclick="openLinkModal(this)" class="w-full text-left px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-400 text-xs font-bold hover:bg-slate-100 transition flex items-center justify-between group">
-                        <span class="file-label">+ Pautkan File</span><i class="fas fa-plus opacity-0 group-hover:opacity-100 transition"></i>
-                    </button>
-                </td>
-                <td class="p-4 text-center align-middle"><button onclick="deleteRow(this)" class="text-slate-300 hover:text-red-500"><i class="fas fa-trash-alt"></i></button></td>
-            `;
+            newRow.innerHTML = `<td class="p-4 text-center align-middle"><div class="bg-slate-200 text-slate-500 font-bold w-8 h-8 rounded flex items-center justify-center mx-auto row-number">${rowCount}</div></td><td class="p-4 align-middle"><input type="text" placeholder="Isi judul..." class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 font-bold text-slate-700 transition"></td><td class="p-4 align-middle"><button onclick="openLinkModal(this)" class="w-full text-left px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-400 text-xs font-bold hover:bg-slate-100 transition flex items-center justify-between group"><span class="file-label">+ Pautkan File</span><i class="fas fa-plus opacity-0 group-hover:opacity-100 transition"></i></button></td><td class="p-4 text-center align-middle"><button onclick="deleteRow(this)" class="text-slate-300 hover:text-red-500"><i class="fas fa-trash-alt"></i></button></td>`;
             tbody.appendChild(newRow);
         }
-
         function deleteRow(btn) {
             if(confirm('Hapus baris rencana ini?')) {
                 btn.closest('tr').remove();
-                document.querySelectorAll('.row-number').forEach((el, index) => {
-                    el.innerText = index + 1;
-                });
+                document.querySelectorAll('.row-number').forEach((el, index) => el.innerText = index + 1);
             }
         }
-
-        function simpanSilabus() {
-            alert('Rencana pembelajaran berhasil disimpan ke database!');
-        }
+        function simpanSilabus() { alert('Rencana pembelajaran berhasil disimpan!'); }
     </script>
-
 </body>
 </html>
